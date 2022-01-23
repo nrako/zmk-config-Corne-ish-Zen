@@ -23,11 +23,11 @@
                 default_layer {
                         label = "QWERTY";
 
-// ---------------------------------------------------------------------------------
-// | TAB  |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | BKSP  |
-// | CTRL |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  ;  |  '    |
-// | SHFT |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  | SHFT  |
-//                    | LWR | GUI | SPC |   | ENT | ALT  | RSE |
+// ------------------------------------------------------------------------------------
+// | TAB  |  Q  |  W  |  E  |  R  |  T  |      |  Y  |  U   |  I  |  O  |  P  | BKSP  |
+// | CTRL |  A  |  S  |  D  |  F  |  G  |      |  H  |  J   |  K  |  L  |  ;  |  '    |
+// | SHFT |  Z  |  X  |  C  |  V  |  B  |      |  N  |  M   |  ,  |  .  |  /  | SHFT  |
+//                    | NUM | ⌘   | SPC |      | ENT |  ⌥   | COD |
 
                         bindings = <
    &kp TAB   &kp Q &kp W &kp E &kp R &kp T   &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSPC
@@ -40,33 +40,33 @@
                 num_layer {
                         label = "NUM";
 
-// -------------------------------------------------------------------------------
-// | TAB  |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | BKSP |
-// | BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |   | LFT | DWN |  UP | RGT |     |      |
-// | SHFT |     |     |     |     |     |   |     |     |     |     |     |      |
-//                    |     | GUI | SPC |   | ENT | ALT |     |
+// ----------------------------------------------------------------------------------
+// | TAB  |  1  |  2  |  3  |  4  |  5  |      |  6  |  7  |  8  |  9  |  0  | BKSP |
+// | CTRL | <<  | ▶II |  >> | V↓  | V↑  |      | LFT | DWN |  UP | RGT |     |      |
+// | SHFT | FN  |     |  ⌥  | ☀️ ↓ | ☀️ ↑ |      | VM  |     |     |     |     | SHFT |
+//                    | NUM | ⌘   | SPC |      | ENT |  ⌥  | FN |
 
                         bindings = <
-   &kp TAB    &kp N1       &kp N2       &kp N3       &kp N4       &kp N5           &kp N6   &kp N7   &kp N8 &kp N9    &kp N0 &kp BSPC
-   &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4     &kp LEFT &kp DOWN &kp UP &kp RIGHT &trans &trans
-   &kp LSHFT  &trans       &trans       &trans       &trans       &trans           &trans   &trans   &trans &trans    &trans &trans
-                                        &trans       &kp LGUI     &kp SPACE        &kp RET  &kp RALT &sl 3
+   &trans  &kp N1      &kp N2    &kp N3      &kp N4        &kp N5           &kp N6      &kp N7   &kp N8 &kp N9    &kp N0 &kp BSPC
+   &trans  &kp C_PREV  &kp C_PP  &kp C_NEXT  &kp C_VOL_DN  &kp C_VOL_UP     &kp LEFT    &kp DOWN &kp UP &kp RIGHT &trans &trans
+   &trans  &mo 3       &trans    &kp LALT    &kp C_BRI_DN  &kp C_BRI_UP     &kp C_MUTE  &trans   &trans &trans    &trans &trans
+                                 &trans       &kp LGUI     &kp SPACE        &kp RET     &kp RALT &sl 3
                         >;
                 };
 
                 code_layer {
                         label = "CODE";
 
-// -------------------------------------------------------------------------------
-// |  `   |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BKSP |
-// | CTRL |     |     |     |     |     |   |  -  |  =  |  [  |  ]  |  \  |  "|" |
-// | SHFT |     |     |     |     |     |   |  _  |  +  |  {  |  }  |  /  |  ~   |
-//                    |     | GUI | SPC |   | ENT | ALT |     |
+// ----------------------------------------------------------------------------------
+// |  `   |  !  |  @  |  #  |  $  |  %  |      |  ^  |  &  |  *  |  (  |  )  | BKSP |
+// | CTRL |     |     |     |     |     |      |  -  |  =  |  [  |  ]  |  \  |  "|" |
+// | SHFT |     |     |  ⌥  |     |     |      |  _  |  +  |  {  |  }  |  /  |  ~   |
+//                    | FN  |  ⌘  | SPC |      | ENT |  ⌥  | COD |
 
                         bindings = <
    &kp GRAVE &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT   &kp CARET &kp AMPS  &kp KP_MULTIPLY &kp LPAR &kp RPAR &kp BSPC
    &kp LCTRL &trans   &trans &trans   &trans   &trans      &kp MINUS &kp EQUAL &kp LBKT        &kp RBKT &kp BSLH &kp PIPE
-   &kp LSHFT &trans   &trans &trans   &trans   &trans      &kp UNDER &kp PLUS  &kp LBRC        &kp RBRC &kp FSLH &kp TILDE
+   &kp LSHFT &trans   &trans &kp LALT &trans   &trans      &kp UNDER &kp PLUS  &kp LBRC        &kp RBRC &kp FSLH &kp TILDE
                              &sl 3    &kp LGUI &kp SPACE   &kp RET   &kp RALT  &trans
                         >;
                 };
@@ -74,16 +74,16 @@
                 function_layer {
                         label = "FN";
 
-// -----------------------------------------------------------------------------
-// |   | F1  | F2  | F3  | F4  | F5  |   | F6  | F7  | F8  | F9  | F0  |       |
-// |   | BT1 | BT2 | BT3 | BT4 | BT5 |   |     |     |     |     |     |       |
-// |   |     |     |     |     |     |   |     |     |     |     |     | BTCLR |
-//                | T FN | GUI | SPC |   | ENT | ALT | T  FN |
+// ---------------------------------------------------------------------------------
+// |   | F1  | F2  | F3  | F4  | F5  |       | F6  | F7  | F8  | F9  | F0  |       |
+// |   | BT1 | BT2 | BT3 | BT4 | BT5 |       |     |     |     |     |     |       |
+// |   |     |     |     |     |     |       |     |     |     |     |     | BTCLR |
+//                | T FN |  ⌘  | SPC |       | ENT |  ⌥  | T FN |
 
                         bindings = <
    &trans &kp F1       &kp F2       &kp F3       &kp F4       &kp F5           &kp F6   &kp F7   &kp F8  &kp F9  &kp F10  &trans
    &trans &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4     &trans   &trans   &trans  &trans  &trans   &trans
-   &trans &trans       &trans       &trans       &trans       &trans           &trans   &trans   &trans  &trans  &trans   &trans
+   &trans &trans       &trans       &trans       &trans       &trans           &trans   &trans   &trans  &trans  &trans   &bt BT_CLR
                                     &tog 3       &kp LGUI     &kp SPACE        &kp RET  &kp RALT &tog 3
                         >;
                 };
