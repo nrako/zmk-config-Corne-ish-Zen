@@ -22,6 +22,24 @@
     zmk,matrix_transform = &default_transform;
     //zmk,matrix_transform = &five_column_transform;
   };
+  combos {
+      compatible = "zmk,combos";
+      combo_scrnsht_all {
+          timeout-ms = <150>;
+          key-positions = <3 24 37>;
+          bindings = <&kp LS(RG(N3))>;
+      };
+      combo_scrnsht_area {
+          timeout-ms = <150>;
+          key-positions = <4 24 37>;
+          bindings = <&kp LS(RG(N4))>;
+      };
+      combo_scrnsht_window {
+          timeout-ms = <150>;
+          key-positions = <5 24 37>;
+          bindings = <&kp LS(RG(N5))>;
+      };
+  };
 };
 
 / {
