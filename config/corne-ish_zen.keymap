@@ -45,6 +45,12 @@
           key-positions = <5 24 37>;
           bindings = <&kp LS(RG(N5))>;
       };
+      combo_caps_lock {
+          timeout-ms = <60>;
+          key-positions = <12 13 14>;
+          layers = <0 1 2>;
+          bindings = <&kp CAPS>;
+      };
   };
 };
 
