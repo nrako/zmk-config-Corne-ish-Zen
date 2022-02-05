@@ -49,16 +49,16 @@
                         label = "NUM";
 
 // ----------------------------------------------------------------------------------
-// | TAB  |  1   |  2     |  3       |  4  |  5  |      |  6  |  7   |  8    |  9  |  0  | BKSP |
-// | CTRL | HOME |   END  |    VM    | V↓  | V↑  |      | LFT | DWN  |  UP   | RGT |     |      |
-// | SHFT | S FN | T GAME | T QWERTY | ☀️ ↓ | ☀️ ↑ |      | I<  | ▶II  |  >>   |  >| |     | SHFT |
+// | TAB  |  1   |  2     |    3     |  4  |  5  |      |  6  |  7   |  8    |  9  |  0  | BKSP |
+// | CTRL |  |<  |  ▶II   |    >|    | V↓  | V↑  |      | LFT | DWN  |  UP   | RGT | HOM |      |
+// | SHFT | S FN | T GAME | T QWERTY | ☀️ ↓ | ☀️ ↑ |      | ▶II | VM   |  ,    |  .  | END | SHFT |
 //                        |  ⌥       |  ⌘  | SPC |      | RET |  1   | ESC ⌥ |
 
                         bindings = <
-   &trans  &kp N1    &kp N2    &kp N3      &kp N4        &kp N5           &kp N6      &kp N7    &kp N8    &kp N9     &kp N0 &trans
-   &trans  &kp HOME  &kp HOME  &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP     &kp LEFT    &kp DOWN  &kp UP    &kp RIGHT  &none  &none
-   &trans  &sl 3     &to 4     &to 0       &kp C_BRI_DN  &kp C_BRI_UP     &kp C_PREV  &kp C_PP  &kp C_FF  &kp C_NEXT &none  &trans
-                               &trans      &trans        &kp SPACE        &trans      &trans    &trans
+   &trans  &kp N1     &kp N2    &kp N3     &kp N4        &kp N5           &kp N6         &kp N7     &kp N8  &kp N9    &kp N0   &trans
+   &trans  &kp C_PREV &kp C_PP  &kp C_FF   &kp C_VOL_DN  &kp C_VOL_UP     &kp LEFT       &kp DOWN   &kp UP  &kp RIGHT &kp HOME &none
+   &trans  &sl 3      &to 4     &to 0      &kp C_BRI_DN  &kp C_BRI_UP     &mt C_FF C_PP  &kp C_MUTE &trans  &trans    &kp END  &trans
+                                &trans     &trans        &kp SPACE        &trans         &trans     &trans
                         >;
                 };
 
