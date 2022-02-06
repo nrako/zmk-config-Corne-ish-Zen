@@ -51,6 +51,11 @@
           layers = <0 1 2>;
           bindings = <&kp CAPS>;
       };
+      combo_combo_del {
+          timeout-ms = <60>;
+          key-positions = <11 40>;
+          bindings = <&kp LG(BSPC)>;
+      };
   };
 };
 
