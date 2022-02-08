@@ -56,6 +56,12 @@
           key-positions = <11 40>;
           bindings = <&kp LG(BSPC)>;
       };
+      combo_combo_emoji {
+          timeout-ms = <150>;
+          key-positions = <12 37 39>;
+          layers = <0>;
+          bindings = <&kp LS(LG(SPACE))>;
+      };
   };
 };
 
