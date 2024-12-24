@@ -74,6 +74,29 @@
                 bindings = <&kp TAB>, <&kp GRAVE>;
                 mods = <(MOD_RALT|MOD_LALT)>;
             };
+            acu_A: acute_a {
+                compatible = "zmk,behavior-mod-morph";
+                label = "ACUTE_A";
+                #binding-cells = <0>;
+                bindings = <&kp A>, <&kp GRAVE &kp A>;
+                mods = <MOD_RALT>;
+            };
+            acu_E: acute_e {
+                compatible = "zmk,behavior-mod-morph";
+                label = "ACUTE_E";
+                #binding-cells = <0>;
+                bindings = <&kp E>, <&acute_e_macro>;
+                mods = <MOD_RALT>;
+            };
+        };
+
+        macros {
+            acute_e_macro: acute_e_macro {
+                compatible = "zmk,behavior-macro";
+                label = "ACUTE_E_MACRO";
+                #binding-cells = <0>;
+                bindings = <&kp RA(E) &kp E>;
+            };
         };
 
         keymap {
@@ -89,10 +112,10 @@
 //                         |  ⌥  |  ⌘  | SPC 2 |      | RET | NUM  | ESC ⌥ |
 
                         bindings = <
-   &gratab    &kp Q &kp W &kp E &kp R &kp T      &kp Y &kp U  &kp I     &kp O   &kp P     &kp BSPC
-   &kp LCTRL  &kp A &kp S &kp D &kp F &kp G      &kp H &kp J  &kp K     &kp L   &kp SEMI  &kp SQT
-   &kp LSHFT  &kp Z &kp X &kp C &kp V &kp B      &kp N &kp M  &kp COMMA &kp DOT &kp FSLH  &kp RSHFT
-              &kp LALT &kp LGUI &lt CODE SPACE   &kp RET &mo NUM &mt RALT ESC
+   &gratab    &kp Q  &kp W &acu_E &kp R &kp T      &kp Y &kp U  &kp I     &kp O   &kp P     &kp BSPC
+   &kp LCTRL  &acu_A &kp S &kp D  &kp F &kp G      &kp H &kp J  &kp K     &kp L   &kp SEMI  &kp SQT
+   &kp LSHFT  &kp Z  &kp X &kp C  &kp V &kp B      &kp N &kp M  &kp COMMA &kp DOT &kp FSLH  &kp RSHFT
+              &kp LALT &kp LGUI  &lt CODE SPACE   &kp RET &mo NUM &mt RALT ESC
                         >;
                 };
 
