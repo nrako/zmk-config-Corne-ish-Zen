@@ -70,6 +70,13 @@
       bindings = <&kp TAB>, <&kp LA(GRAVE)>;
       mods = <(MOD_RALT|MOD_LALT)>;
     };
+    // single tap shift, double tap caps word
+    rshiftcap: r_shift_caps_word {
+      compatible = "zmk,behavior-tap-dance";
+      #binding-cells = <0>;
+      tapping-term-ms = <200>;
+      bindings = <&kp RSHFT>, <&caps_word>;
+    };
   };
   keymap {
     compatible = "zmk,keymap";
@@ -87,7 +94,7 @@
 // ├─────────────┼─────────────┼─────────────┼──────────────┼──────────────┼──────────────┤   ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤
      &kp LCTRL     &kp A         &kp S         &kp D          &kp F          &kp G              &kp H          &kp J          &kp K          &kp L          &kp SEMI       &kp SQT
 // ├─────────────┼─────────────┼─────────────┼──────────────┼──────────────┼──────────────┤   ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤
-     &kp LSHFT     &kp Z         &kp X         &kp C          &kp V          &kp B              &kp N          &kp M          &kp COMMA      &kp DOT        &kp FSLH       &kp RSHFT
+     &kp LSHFT     &kp Z         &kp X         &kp C          &kp V          &kp B              &kp N          &kp M          &kp COMMA      &kp DOT        &kp FSLH       &rshiftcap
 // ╰─────────────┴─────────────┴─────────────┼──────────────┼──────────────┼──────────────┤   ├──────────────┼──────────────┼──────────────┼──────────────┴──────────────┴──────────────╯
                                                &kp LALT       &kp LGUI       &lt CODE SPACE     &kp RET        &mo NUM        &mt RALT ESC
 //                                           ╰──────────────┴──────────────┴──────────────╯   ╰──────────────┴──────────────┴──────────────╯
