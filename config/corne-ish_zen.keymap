@@ -78,7 +78,7 @@
                 compatible = "zmk,behavior-mod-morph";
                 label = "ACUTE_A";
                 #binding-cells = <0>;
-                bindings = <&kp A>, <&kp GRAVE &kp A>;
+                bindings = <&kp A>, <&kp RA(GRAVE) &kp A>;
                 mods = <MOD_RALT>;
             };
             acu_E: acute_e {
