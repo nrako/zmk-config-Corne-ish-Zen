@@ -16,11 +16,31 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
+#include "zmk-helpers/helper.h"
+
+#undef CONFIG_ZMK_MACRO_DEFAULT_WAIT_MS
+#define CONFIG_ZMK_MACRO_DEFAULT_WAIT_MS 30
+
+#undef CONFIG_ZMK_MACRO_DEFAULT_TAP_MS
+#define CONFIG_ZMK_MACRO_DEFAULT_TAP_MS 40
 
 #define QWERTY 0
 #define NUM    1
 #define CODE   2
 #define FN     3
+
+// First define the acute accent macro (similar to how AIGU is defined in the file)
+ZMK_MACRO_ONE_PARAM(ACUTE, bindings =
+    <&kp RA(E)>,                    // First press AltGr+E for the acute accent
+    <&macro_param_1to1>,            // Then press the parameter (E or Shift+E)
+    <&macro_tap &kp MACRO_PLACEHOLDER>;
+)
+
+// Then create a mod-morph that will output é or É depending on Shift
+ZMK_MOD_MORPH(morph_e_acute, 
+    bindings = <&ACUTE E>, <&ACUTE LS(E)>;  // Without/with Shift
+    mods = <(MOD_LSFT|MOD_RSFT)>;          // Trigger on either Shift key
+)
 
 / {
   chosen {
@@ -74,36 +94,37 @@
                 bindings = <&kp TAB>, <&kp GRAVE>;
                 mods = <(MOD_RALT|MOD_LALT)>;
             };
-            grav_a: grave_a {
-                compatible = "zmk,behavior-mod-morph";
-                label = "GRAVE_A";
-                #binding-cells = <0>;
-                bindings = <&kp A>, <&grave_a_macro>;
-                mods = <MOD_RALT>;
-            };
-            acu_E: acute_e {
-                compatible = "zmk,behavior-mod-morph";
-                label = "ACUTE_E";
-                #binding-cells = <0>;
-                bindings = <&kp E>, <&acute_e_macro>;
-                mods = <MOD_RALT>;
-            };
+            // grav_a: grave_a {
+            //     compatible = "zmk,behavior-mod-morph";
+            //     label = "GRAVE_A";
+            //     #binding-cells = <0>;
+            //     bindings = <&kp A>, <&grave_a_macro>;
+            //     mods = <MOD_RALT>;
+            // };
+            // acu_E: acute_e {
+            //     compatible = "zmk,behavior-mod-morph";
+            //     label = "ACUTE_E";
+            //     #binding-cells = <0>;
+            //     bindings = <&kp E>, <&acute_e_macro>;
+            //     mods = <MOD_RALT>;
+            // };
         };
 
-        macros {
-            grave_a_macro: grave_a_macro {
-                compatible = "zmk,behavior-macro";
-                label = "GRAVE_A_MACRO";
-                #binding-cells = <0>;
-                bindings = <&kp RA(GRAVE) &kp A>;
-            };
-            acute_e_macro: acute_e_macro {
-                compatible = "zmk,behavior-macro";
-                label = "ACUTE_E_MACRO";
-                #binding-cells = <0>;
-                bindings = <&kp RA(E) &kp E>;
-            };
-        };
+        // TODO check https://github.com/JeffDess/zmk-config/blob/accents-no-unicode/layouts/canadian-multilingual-standard.dtsi
+        // macros {
+        //     grave_a_macro: grave_a_macro {
+        //         compatible = "zmk,behavior-macro";
+        //         label = "GRAVE_A_MACRO";
+        //         #binding-cells = <0>;
+        //         bindings = <&kp RA(GRAVE) &kp A>;
+        //     };
+        //     acute_e_macro: acute_e_macro {
+        //         compatible = "zmk,behavior-macro";
+        //         label = "ACUTE_E_MACRO";
+        //         #binding-cells = <0>;
+        //         bindings = <&kp RA(E) &kp E>;
+        //     };
+        // };
 
         keymap {
                 compatible = "zmk,keymap";
@@ -118,8 +139,8 @@
 //                         |  ⌥  |  ⌘  | SPC 2 |      | RET | NUM  | ESC ⌥ |
 
                         bindings = <
-   &gratab    &kp Q  &kp W &acu_E &kp R &kp T      &kp Y &kp U  &kp I     &kp O   &kp P     &kp BSPC
-   &kp LCTRL  &grav_a grave_akp S &kp D  &kp F &kp G      &kp H &kp J  &kp K     &kp L   &kp SEMI  &kp SQT
+   &gratab    &kp Q  &kp W &morph_e_acute &kp R &kp T      &kp Y &kp U  &kp I     &kp O   &kp P     &kp BSPC
+   &kp LCTRL  &kp A  &kp S &kp D  &kp F &kp G      &kp H &kp J  &kp K     &kp L   &kp SEMI  &kp SQT
    &kp LSHFT  &kp Z  &kp X &kp C  &kp V &kp B      &kp N &kp M  &kp COMMA &kp DOT &kp FSLH  &kp RSHFT
               &kp LALT &kp LGUI  &lt CODE SPACE   &kp RET &mo NUM &mt RALT ESC
                         >;
