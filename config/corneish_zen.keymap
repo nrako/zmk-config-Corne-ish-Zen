@@ -30,46 +30,110 @@
   combos {
     compatible = "zmk,combos";
     combo._esc {
-        timeout-ms = <60>;
-        key-positions = <0 1>;
-        layers = <0 1 2>;
-        bindings = <&kp ESC>;
+      timeout-ms = <60>;
+      key-positions = <0 1>;
+      layers = <0 1 2>;
+      bindings = <&kp ESC>;
     };
     combo_scrnsht_all {
-        timeout-ms = <150>;
-        key-positions = <3 24 37>;
-        bindings = <&kp LS(RG(N3))>;
+      timeout-ms = <150>;
+      key-positions = <3 24 37>;
+      bindings = <&kp LS(RG(N3))>;
     };
     combo_scrnsht_area {
-        timeout-ms = <150>;
-        key-positions = <4 24 37>;
-        bindings = <&kp LS(RG(N4))>;
+      timeout-ms = <150>;
+      key-positions = <4 24 37>;
+      bindings = <&kp LS(RG(N4))>;
     };
     combo_scrnsht_window {
-        timeout-ms = <150>;
-        key-positions = <5 24 37>;
-        bindings = <&kp LS(RG(N5))>;
+      timeout-ms = <150>;
+      key-positions = <5 24 37>;
+      bindings = <&kp LS(RG(N5))>;
     };
     combo_caps_lock {
-        timeout-ms = <60>;
-        key-positions = <12 13 14>;
-        layers = <0 1 2>;
-        bindings = <&kp CAPS>;
+      timeout-ms = <60>;
+      key-positions = <12 13 14>;
+      layers = <0 1 2>;
+      bindings = <&kp CAPS>;
     };
     combo_combo_del {
-        timeout-ms = <60>;
-        key-positions = <11 40>;
-        bindings = <&kp LG(BSPC)>;
+      timeout-ms = <60>;
+      key-positions = <11 40>;
+      bindings = <&kp LG(BSPC)>;
     };
   };
   behaviors {
-      gratab: grave_tab {
-          compatible = "zmk,behavior-mod-morph";
-          label = "GRAVE_TAB";
-          #binding-cells = <0>;
-          bindings = <&kp TAB>, <&kp GRAVE>;
-          mods = <(MOD_RALT|MOD_LALT)>;
-      };
+    gratab: grave_tab {
+      compatible = "zmk,behavior-mod-morph";
+      label = "GRAVE_TAB";
+      #binding-cells = <0>;
+      bindings = <&kp TAB>, <&kp LA(GRAVE)>;
+      mods = <(MOD_RALT|MOD_LALT)>;
+    };
+    acute_e: acute_e {
+      compatible = "zmk,behavior-mod-morph";
+      label = "ACUTE_E";
+      #binding-cells = <0>;
+      bindings = <&kp E>, <&acute_e_morph>;  // Normal E or acute logic
+      mods = <(MOD_RALT)>;                   // Trigger on RALT
+      keep-mods = <(MOD_LSFT|MOD_RSFT)>;    // Pass shift state through
+    };
+    acute_e_morph: acute_e_morph {
+      compatible = "zmk,behavior-mod-morph";
+      label = "ACUTE_E_MORPH";
+      #binding-cells = <0>;
+      bindings = <&acute_e_lower>, <&acute_e_upper>;  // lowercase or uppercase
+      mods = <(MOD_LSFT|MOD_RSFT)>;                  // Trigger on either shift
+    };
+    grave_a: grave_a {
+      compatible = "zmk,behavior-mod-morph";
+      label = "GRAVE_A";
+      #binding-cells = <0>;
+      bindings = <&kp A>, <&grave_a_morph>;  // Normal A or grave logic
+      mods = <(MOD_RALT)>;                   // Trigger on RALT
+      keep-mods = <(MOD_LSFT|MOD_RSFT)>;    // Pass shift state through
+    };
+    grave_a_morph: grave_a_morph {
+      compatible = "zmk,behavior-mod-morph";
+      label = "GRAVE_A_MORPH";
+      #binding-cells = <0>;
+      bindings = <&grave_a_lower>, <&grave_a_upper>;  // lowercase or uppercase
+      mods = <(MOD_LSFT|MOD_RSFT)>;                  // Trigger on either shift
+    };
+  };
+  macros {
+    acute_e_lower: acute_e_lower {
+      compatible = "zmk,behavior-macro";
+      label = "ACUTE_E_LOWER";
+      #binding-cells = <0>;
+      bindings =
+        <&macro_tap &kp RA(E)>,
+        <&macro_tap &kp E>;
+    };
+    acute_e_upper: acute_e_upper {
+      compatible = "zmk,behavior-macro";
+      label = "ACUTE_E_UPPER";
+      #binding-cells = <0>;
+      bindings =
+        <&macro_tap &kp RA(E)>,
+        <&macro_tap &kp LS(E)>;
+    };
+    grave_a_lower: grave_a_lower {
+      compatible = "zmk,behavior-macro";
+      label = "GRAVE_A_LOWER";
+      #binding-cells = <0>;
+      bindings =
+        <&macro_tap &kp RA(GRAVE)>,    // GRAVE key for grave accent
+        <&macro_tap &kp A>;
+    };
+    grave_a_upper: grave_a_upper {
+      compatible = "zmk,behavior-macro";
+      label = "GRAVE_A_UPPER";
+      #binding-cells = <0>;
+      bindings =
+        <&macro_tap &kp RA(GRAVE)>,    // GRAVE key for grave accent
+        <&macro_tap &kp LS(A)>;
+    };
   };
   keymap {
     compatible = "zmk,keymap";
@@ -83,9 +147,9 @@
 //                         |  ⌥  |  ⌘  | SPC 2 |      | RET | NUM  | ESC ⌥ |
       bindings = <
 // ╭─────────────┬─────────────┬─────────────┬──────────────┬──────────────┬──────────────╮   ╭──────────────┬──────────────┬──────────────┬──────────────┬──────────────┬──────────────╮
-     &gratab       &kp Q         &kp W         &kp E          &kp R          &kp T              &kp Y          &kp U          &kp I          &kp O          &kp P          &kp BSPC
+     &gratab       &kp Q         &kp W         &acute_e       &kp R          &kp T              &kp Y          &kp U          &kp I          &kp O          &kp P          &kp BSPC
 // ├─────────────┼─────────────┼─────────────┼──────────────┼──────────────┼──────────────┤   ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤
-     &kp LCTRL     &kp A         &kp S         &kp D          &kp F          &kp G              &kp H          &kp J          &kp K          &kp L          &kp SEMI       &kp SQT
+     &kp LCTRL     &grave_a      &kp S         &kp D          &kp F          &kp G              &kp H          &kp J          &kp K          &kp L          &kp SEMI       &kp SQT
 // ├─────────────┼─────────────┼─────────────┼──────────────┼──────────────┼──────────────┤   ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤
      &kp LSHFT     &kp Z         &kp X         &kp C          &kp V          &kp B              &kp N          &kp M          &kp COMMA      &kp DOT        &kp FSLH       &kp RSHFT
 // ╰─────────────┴─────────────┴─────────────┼──────────────┼──────────────┼──────────────┤   ├──────────────┼──────────────┼──────────────┼──────────────┴──────────────┴──────────────╯
