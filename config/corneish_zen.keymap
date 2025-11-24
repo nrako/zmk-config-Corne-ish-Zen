@@ -64,14 +64,6 @@
     };
   };
   macros {
-    emoji_picker: emoji_picker {
-      compatible = "zmk,behavior-macro";
-      #binding-cells = <0>;
-      bindings = <&macro_press &kp GLOBE>
-               , <&macro_pause_for_release>
-               , <&macro_tap &kp E>
-               , <&macro_release &kp GLOBE>;
-    };
     double_globe: double_globe {
       compatible = "zmk,behavior-macro";
       #binding-cells = <0>;
@@ -98,14 +90,6 @@
       #binding-cells = <0>;
       tapping-term-ms = <300>;
       bindings = <&mo NUM>, <&to NUPAD>;
-    };
-    // return key that triggers emoji picker with ctrl+cmd
-    ret_emoji: return_emoji_picker {
-      compatible = "zmk,behavior-mod-morph";
-      label = "RETURN_EMOJI";
-      #binding-cells = <0>;
-      bindings = <&kp RET>, <&emoji_picker>;
-      mods = <(MOD_LGUI|MOD_LCTL)>;
     };
     // tap-dance: single tap = esc, double tap = double globe (dictation)
     td_esc_globe: tap_dance_esc_globe {
@@ -151,7 +135,7 @@
 // ├─────────────┼─────────────┼─────────────┼──────────────┼──────────────┼──────────────┤   ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤
      &lshift_globe &kp Z         &kp X         &kp C          &kp V          &kp B              &kp N          &kp M          &kp COMMA      &kp DOT        &kp FSLH       &rshiftcap
 // ╰─────────────┴─────────────┴─────────────┼──────────────┼──────────────┼──────────────┤   ├──────────────┼──────────────┼──────────────┼──────────────┴──────────────┴──────────────╯
-                                               &kp LALT       &kp LGUI       &lt CODE SPACE     &ret_emoji     &mo NUM        &esc_ralt RALT 0
+                                               &kp LALT       &kp LGUI       &lt CODE SPACE     &kp RET        &mo NUM        &esc_ralt RALT 0
 //                                           ╰──────────────┴──────────────┴──────────────╯   ╰──────────────┴──────────────┴──────────────╯
       >;
     };
