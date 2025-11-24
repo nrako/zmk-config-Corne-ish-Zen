@@ -63,6 +63,15 @@
       bindings = <&kp LG(BSPC)>;
     };
   };
+  macros {
+    emoji_picker: emoji_picker {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      bindings = <&macro_press &kp GLOBE>
+               , <&macro_tap &kp E>
+               , <&macro_release &kp GLOBE>;
+    };
+  };
   behaviors {
     gratab: grave_tab {
       compatible = "zmk,behavior-mod-morph";
@@ -84,6 +93,14 @@
       tapping-term-ms = <300>;
       bindings = <&mo NUM>, <&to NUPAD>;
     };
+    // return key that triggers emoji picker with ctrl+cmd
+    ret_emoji: return_emoji_picker {
+      compatible = "zmk,behavior-mod-morph";
+      label = "RETURN_EMOJI";
+      #binding-cells = <0>;
+      bindings = <&kp RET>, <&emoji_picker>;
+      mods = <(MOD_LGUI|MOD_LCTL)>;
+    };
   };
   keymap {
     compatible = "zmk,keymap";
@@ -103,7 +120,7 @@
 // ├─────────────┼─────────────┼─────────────┼──────────────┼──────────────┼──────────────┤   ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤
      &kp LSHFT     &kp Z         &kp X         &kp C          &kp V          &kp B              &kp N          &kp M          &kp COMMA      &kp DOT        &kp FSLH       &rshiftcap
 // ╰─────────────┴─────────────┴─────────────┼──────────────┼──────────────┼──────────────┤   ├──────────────┼──────────────┼──────────────┼──────────────┴──────────────┴──────────────╯
-                                               &kp LALT       &kp LGUI       &lt CODE SPACE     &kp RET        &tdn           &mt RALT ESC
+                                               &kp LALT       &kp LGUI       &lt CODE SPACE     &ret_emoji     &tdn           &mt RALT ESC
 //                                           ╰──────────────┴──────────────┴──────────────╯   ╰──────────────┴──────────────┴──────────────╯
       >;
     };
