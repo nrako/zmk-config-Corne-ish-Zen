@@ -24,6 +24,47 @@ If you are looking to dig deeper into ZMK and develop new functionality, it is r
 3. Edit the keymap file(s) to suit your needs
 4. Commit and push your changes to your personal repo. Upon pushing it, GitHub Actions will start building a new version of your firmware with the updated keymap.
 
+## Keyboard Shortcuts & Combos
+
+This configuration includes several combos and special behaviors to enhance productivity:
+
+### Key Combos (simultaneous key presses)
+
+- **Q + W** → ESC (works on QWERTY, NUM, and CODE layers)
+- **Left Shift + Cmd + E** → Screenshot (full screen) - Cmd+Shift+3
+- **Left Shift + Cmd + R** → Screenshot (area selection) - Cmd+Shift+4
+- **Left Shift + Cmd + T** → Screenshot (window) - Cmd+Shift+5
+- **A + S + D** → Caps Lock (works on QWERTY, NUM, and CODE layers)
+- **P + NUM layer key** → Delete word (Cmd+Backspace)
+
+### Special Tap/Hold/Multi-tap Behaviors
+
+- **TAB key**: Tap = TAB, with Alt held = Alt+` (window switcher in macOS)
+- **Right Shift**: Single tap = Shift, Double tap = Caps Word
+- **Return key**: Normal = Return, Ctrl+Cmd+Return = Emoji Picker (sends Globe+E)
+- **ESC key**: Single tap = ESC, Double tap = Dictation (sends Globe twice), Hold = Right Alt
+- **Left Shift**: Normal = Shift, With Right Alt held = Globe key
+  - Enables Globe combinations like Globe+H (show desktop), Globe+Space (Siri), Globe+Q (Quick Note), etc.
+- **Space (on QWERTY)**: Hold = CODE layer access
+
+### Layer Access
+
+- **NUM layer thumb key**: Momentary access to NUM layer (hold to access, release to return)
+- **' key on NUM layer**: Toggle NUPAD layer on/off
+- **Z key on NUM layer**: Sticky FN layer (one-shot access)
+- **C key on NUM layer**: Toggle back to QWERTY layer
+- **Z key on FN layer**: Toggle FN layer on/off
+- **C key on FN layer**: Toggle QWERTY layer
+
+### macOS Integration
+
+This keymap is optimized for macOS with special support for:
+- Globe key combinations (accessed via Right Alt + Left Shift)
+- Emoji picker (Ctrl+Cmd+Return)
+- Dictation (double-tap ESC)
+- Window management shortcuts
+- Media controls on NUM layer (play/pause, volume, brightness)
+
 ## Firmware Files
 
 To locate your firmware files...
