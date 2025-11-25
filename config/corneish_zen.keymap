@@ -75,8 +75,9 @@
       compatible = "zmk,behavior-mod-morph";
       label = "GRAVE_TAB";
       #binding-cells = <0>;
-      bindings = <&kp TAB>, <&kp LA(GRAVE)>;
+      bindings = <&kp TAB>, <&kp GRAVE>;
       mods = <(MOD_RALT|MOD_LALT)>;
+      keep-mods = <(MOD_RALT|MOD_LALT)>;
     };
     // single tap shift, double tap caps word
     rshiftcap: r_shift_caps_word {
