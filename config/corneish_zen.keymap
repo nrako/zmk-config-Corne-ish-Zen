@@ -23,6 +23,12 @@
 #define FN     3
 #define NUPAD  4
 
+// Hyper = Ctrl+Alt+Shift+Gui (⌃⌥⇧⌘). HYPER(key) emits that chord with key.
+#define HYPER(key) LC(LA(LS(LG(key))))
+// TypeWhisper on CODE pos 15: hold = Hyper+Q sustained (push-to-talk, via the
+// ptt macro), tap = Hyper+W (toggle). First param is unused (ptt bakes in Q).
+#define WHISPER &wsp 0 HYPER(W)
+
 / {
   chosen {
     zmk,physical-layout = &foostan_corne_6col_layout;
@@ -64,10 +70,16 @@
     };
   };
   macros {
-    double_globe: double_globe {
+    // Push-to-talk: press Hyper+Q with EXPLICIT modifiers and hold until the
+    // key is released. Implicit mods via &kp HYPER(Q) don't stay cleanly held
+    // for a sustained chord; explicit presses do. Hold branch of wsp.
+    ptt: ptt {
       compatible = "zmk,behavior-macro";
       #binding-cells = <0>;
-      bindings = <&macro_tap &kp GLOBE &kp GLOBE>;
+      bindings
+        = <&macro_press &kp LCTRL &kp LALT &kp LSHFT &kp LGUI &kp Q>
+        , <&macro_pause_for_release>
+        , <&macro_release &kp LCTRL &kp LALT &kp LSHFT &kp LGUI &kp Q>;
     };
   };
   behaviors {
@@ -92,30 +104,26 @@
       tapping-term-ms = <300>;
       bindings = <&mo NUM>, <&to NUPAD>;
     };
-    // tap-dance: single tap = esc, double tap = double globe (dictation)
-    td_esc_globe: tap_dance_esc_globe {
-      compatible = "zmk,behavior-tap-dance";
-      #binding-cells = <0>;
-      tapping-term-ms = <200>;
-      bindings = <&kp ESC>, <&double_globe>;
-    };
-    // hold-tap: tap = tap-dance above, hold = right alt
+    // hold-tap: hold = right alt (feeds gratab grave morph), tap = esc
     esc_ralt: esc_right_alt {
       compatible = "zmk,behavior-hold-tap";
       label = "ESC_RALT";
       #binding-cells = <2>;
-      tapping-term-ms = <200>;
+      tapping-term-ms = <180>;
       quick-tap-ms = <0>;
       flavor = "tap-preferred";
-      bindings = <&kp>, <&td_esc_globe>;
+      bindings = <&kp>, <&kp>;
     };
-    // left shift that becomes Globe when Right Alt is held
-    lshift_globe: left_shift_globe {
-      compatible = "zmk,behavior-mod-morph";
-      label = "LSHIFT_GLOBE";
-      #binding-cells = <0>;
-      bindings = <&kp LSHFT>, <&kp GLOBE>;
-      mods = <(MOD_RALT)>;
+    // TypeWhisper on one key (CODE pos 15): hold = ptt macro (Hyper+Q held
+    // for push-to-talk), tap = Hyper+W (toggle). First param feeds ptt and is
+    // ignored; second is the tap chord.
+    wsp: whisper_ptt_toggle {
+      compatible = "zmk,behavior-hold-tap";
+      label = "WSP";
+      #binding-cells = <2>;
+      tapping-term-ms = <200>;
+      flavor = "hold-preferred";
+      bindings = <&ptt>, <&kp>;
     };
   };
   keymap {
@@ -134,9 +142,9 @@
 // ├─────────────┼─────────────┼─────────────┼──────────────┼──────────────┼──────────────┤   ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤
      &kp LCTRL     &kp A         &kp S         &kp D          &kp F          &kp G              &kp H          &kp J          &kp K          &kp L          &kp SEMI       &kp SQT
 // ├─────────────┼─────────────┼─────────────┼──────────────┼──────────────┼──────────────┤   ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤
-     &lshift_globe &kp Z         &kp X         &kp C          &kp V          &kp B              &kp N          &kp M          &kp COMMA      &kp DOT        &kp FSLH       &rshiftcap
+     &kp LSHFT     &kp Z         &kp X         &kp C          &kp V          &kp B              &kp N          &kp M          &kp COMMA      &kp DOT        &kp FSLH       &rshiftcap
 // ╰─────────────┴─────────────┴─────────────┼──────────────┼──────────────┼──────────────┤   ├──────────────┼──────────────┼──────────────┼──────────────┴──────────────┴──────────────╯
-                                               &kp LALT       &kp LGUI       &lt CODE SPACE     &kp RET        &mo NUM        &esc_ralt RALT 0
+                                               &kp LALT       &kp LGUI       &lt CODE SPACE     &kp RET        &mo NUM        &esc_ralt RALT ESC
 //                                           ╰──────────────┴──────────────┴──────────────╯   ╰──────────────┴──────────────┴──────────────╯
       >;
     };
@@ -147,7 +155,7 @@
 // ----------------------------------------------------------------------------------
 // | TAB  |  1   |  2     |    3     |  4  |  5  |      |  6  |  7   |  8    |  9  |  0  | BKSP   |
 // | CTRL |  |<  |  ▶II   |    >|    | V↓  | V↑  |      | LFT | DWN  |  UP   | RGT | HOM | T NUPAD|
-// | SHFT | S FN |        | T QWERTY | ☀️ ↓ | ☀️ ↑ |      | ▶II | VM   |  ,    |  .  | END | SHFT   |
+// | SHFT | S FN |        | T QWERTY | ☀️↓ | ☀️↑ |      | ▶II | VM   |  ,    |  .  | END | SHFT   |
 //                        |  ⌥       |  ⌘  | SPC |      | RET | NUM  | ESC ⌥ |
       bindings = <
 // ╭─────────────┬─────────────┬─────────────┬──────────────┬──────────────┬──────────────╮   ╭──────────────┬──────────────┬──────────────┬──────────────┬──────────────┬──────────────╮
@@ -167,16 +175,16 @@
 
 // ----------------------------------------------------------------------------------
 // |  `   |  !  |  @  |  #  |  $  |  %    |      |  ^  |  &  |  *  |  (  |  )  | BKSP |
-// | CTRL |     |     |     |     |       |      |  -  |  =  |  [  |  ]  |  \  |  "|" |
-// | SHFT |     |     |     |     |       |      |  _  |  +  |  {  |  }  |  /  |  ~   |
+// | CTRL |     |     | 🎙  |     |       |      |  -  |  =  |  [  |  ]  |  \  |  "|" |
+// | SHFT | 😀  |     |     |     |       |      |  _  |  +  |  {  |  }  |  /  |  ~   |
 //                    |  ⌥  |  ⌘  | SPC 2 |      | RET |  ⌘  | ESC ⌥ |
       bindings = <
 // ╭─────────────┬─────────────┬─────────────┬──────────────┬──────────────┬──────────────╮   ╭──────────────┬──────────────┬──────────────┬──────────────┬──────────────┬──────────────╮
      &kp GRAVE     &kp EXCL      &kp AT        &kp HASH       &kp DLLR       &kp PRCNT          &kp CARET      &kp AMPS       &kp KP_MULTIPLY &kp LPAR       &kp RPAR       &trans
 // ├─────────────┼─────────────┼─────────────┼──────────────┼──────────────┼──────────────┤   ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤
-     &trans        &none         &none         &none          &none          &none              &kp MINUS      &kp EQUAL      &kp LBKT       &kp RBKT       &kp BSLH       &kp PIPE
+     &trans        &none         &none         WHISPER        &none          &none              &kp MINUS      &kp EQUAL      &kp LBKT       &kp RBKT       &kp BSLH       &kp PIPE
 // ├─────────────┼─────────────┼─────────────┼──────────────┼──────────────┼──────────────┤   ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤
-     &trans        &none         &none         &none          &none          &none              &kp UNDER      &kp PLUS       &kp LBRC       &kp RBRC       &kp FSLH       &kp TILDE
+     &trans        &kp LC(LG(SPACE)) &none      &none          &none          &none              &kp UNDER      &kp PLUS       &kp LBRC       &kp RBRC       &kp FSLH       &kp TILDE
 // ╰─────────────┴─────────────┴─────────────┼──────────────┼──────────────┼──────────────┤   ├──────────────┼──────────────┼──────────────┼──────────────┴──────────────┴──────────────╯
                                                &trans         &trans         &trans             &trans         &kp RGUI       &trans
 //                                           ╰──────────────┴──────────────┴──────────────╯   ╰──────────────┴──────────────┴──────────────╯
@@ -210,7 +218,7 @@
 // ----------------------------------------------------------------------------------
 // | TAB  |      |        |          |     |     |      |  /  |  7   |  8    |  9  |  +  | BKSP |
 // | CTRL |  |<  |  ▶II   |    >|    | V↓  | V↑  |      |  *  |  4   |  5    |  6  |  -  | TAB  |
-// | SHFT | S FN |        | T QWERTY | ☀️ ↓ | ☀️ ↑ |      |  0  |  1   |  2    |  3  |  .  | RET  |
+// | SHFT | S FN |        | T QWERTY | ☀️↓ | ☀️↑ |      |  0  |  1   |  2    |  3  |  .  | RET  |
 //                        |  ⌥       |  ⌘  | SPC |      | RET | NUM  | ESC ⌥ |
       bindings = <
 // ╭─────────────┬─────────────┬─────────────┬──────────────┬──────────────┬──────────────╮   ╭──────────────┬──────────────┬──────────────┬──────────────┬──────────────┬──────────────╮
