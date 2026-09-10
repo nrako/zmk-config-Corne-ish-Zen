@@ -412,3 +412,71 @@ aside.active {
     font-size: 17px;
   }
 }
+.modifiers {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 22px;
+  padding: 0 10px;
+  font-size: 13px;
+  color: #aeb6c2;
+  flex-wrap: wrap;
+}
+.modifiers button {
+  padding: 7px 13px;
+}
+.modifiers button[aria-pressed="true"] {
+  color: #ffb9b1;
+  border-color: #c97770;
+  background: #4a302f;
+}
+.modifier-note {
+  margin-left: auto;
+  font-size: 11px;
+}
+.key.activation rect,
+.key.modifier-active rect {
+  stroke: #d77b74;
+  fill: #352626;
+}
+.key.activation text,
+.key.modifier-active text {
+  fill: #ff9d94;
+}
+.key.activation-toggle rect {
+  stroke-dasharray: 3 2;
+}
+.key.dead-key .legend {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+}
+.layer-heading .route {
+  color: #e4a49e;
+  font-size: 11px;
+  margin-top: 7px;
+}
+.legend-guide {
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.legend-guide i.red {
+  background: #d77b74;
+}
+.keyboard {
+  margin: 14px 0 25px;
+}
+.key .legend {
+  font-size: 12px;
+}
+.key .legend.small {
+  font-size: 8px;
+}
+.key .secondary {
+  font-size: 6px;
+}
+.case {
+  stroke-width: 0.8;
+}
+.screen {
+  stroke-width: 0.8;
+}

@@ -1,0 +1,851 @@
+{
+  "keys": {
+    "0": [
+      {
+        "dead": false,
+        "text": "a"
+      },
+      {
+        "dead": false,
+        "text": "A"
+      },
+      {
+        "dead": false,
+        "text": "å"
+      },
+      {
+        "dead": false,
+        "text": "Å"
+      }
+    ],
+    "1": [
+      {
+        "dead": false,
+        "text": "s"
+      },
+      {
+        "dead": false,
+        "text": "S"
+      },
+      {
+        "dead": false,
+        "text": "ß"
+      },
+      {
+        "dead": false,
+        "text": "Í"
+      }
+    ],
+    "2": [
+      {
+        "dead": false,
+        "text": "d"
+      },
+      {
+        "dead": false,
+        "text": "D"
+      },
+      {
+        "dead": false,
+        "text": "∂"
+      },
+      {
+        "dead": false,
+        "text": "Î"
+      }
+    ],
+    "3": [
+      {
+        "dead": false,
+        "text": "f"
+      },
+      {
+        "dead": false,
+        "text": "F"
+      },
+      {
+        "dead": false,
+        "text": "ƒ"
+      },
+      {
+        "dead": false,
+        "text": "Ï"
+      }
+    ],
+    "4": [
+      {
+        "dead": false,
+        "text": "h"
+      },
+      {
+        "dead": false,
+        "text": "H"
+      },
+      {
+        "dead": false,
+        "text": "˙"
+      },
+      {
+        "dead": false,
+        "text": "Ó"
+      }
+    ],
+    "5": [
+      {
+        "dead": false,
+        "text": "g"
+      },
+      {
+        "dead": false,
+        "text": "G"
+      },
+      {
+        "dead": false,
+        "text": "©"
+      },
+      {
+        "dead": false,
+        "text": "˝"
+      }
+    ],
+    "6": [
+      {
+        "dead": false,
+        "text": "z"
+      },
+      {
+        "dead": false,
+        "text": "Z"
+      },
+      {
+        "dead": false,
+        "text": "Ω"
+      },
+      {
+        "dead": false,
+        "text": "¸"
+      }
+    ],
+    "7": [
+      {
+        "dead": false,
+        "text": "x"
+      },
+      {
+        "dead": false,
+        "text": "X"
+      },
+      {
+        "dead": false,
+        "text": "≈"
+      },
+      {
+        "dead": false,
+        "text": "˛"
+      }
+    ],
+    "8": [
+      {
+        "dead": false,
+        "text": "c"
+      },
+      {
+        "dead": false,
+        "text": "C"
+      },
+      {
+        "dead": false,
+        "text": "ç"
+      },
+      {
+        "dead": false,
+        "text": "Ç"
+      }
+    ],
+    "9": [
+      {
+        "dead": false,
+        "text": "v"
+      },
+      {
+        "dead": false,
+        "text": "V"
+      },
+      {
+        "dead": false,
+        "text": "√"
+      },
+      {
+        "dead": false,
+        "text": "◊"
+      }
+    ],
+    "11": [
+      {
+        "dead": false,
+        "text": "b"
+      },
+      {
+        "dead": false,
+        "text": "B"
+      },
+      {
+        "dead": false,
+        "text": "∫"
+      },
+      {
+        "dead": false,
+        "text": "ı"
+      }
+    ],
+    "12": [
+      {
+        "dead": false,
+        "text": "q"
+      },
+      {
+        "dead": false,
+        "text": "Q"
+      },
+      {
+        "dead": false,
+        "text": "œ"
+      },
+      {
+        "dead": false,
+        "text": "Œ"
+      }
+    ],
+    "13": [
+      {
+        "dead": false,
+        "text": "w"
+      },
+      {
+        "dead": false,
+        "text": "W"
+      },
+      {
+        "dead": false,
+        "text": "∑"
+      },
+      {
+        "dead": false,
+        "text": "„"
+      }
+    ],
+    "14": [
+      {
+        "dead": false,
+        "text": "e"
+      },
+      {
+        "dead": false,
+        "text": "E"
+      },
+      {
+        "dead": true,
+        "text": "´"
+      },
+      {
+        "dead": false,
+        "text": "´"
+      }
+    ],
+    "15": [
+      {
+        "dead": false,
+        "text": "r"
+      },
+      {
+        "dead": false,
+        "text": "R"
+      },
+      {
+        "dead": false,
+        "text": "®"
+      },
+      {
+        "dead": false,
+        "text": "‰"
+      }
+    ],
+    "16": [
+      {
+        "dead": false,
+        "text": "y"
+      },
+      {
+        "dead": false,
+        "text": "Y"
+      },
+      {
+        "dead": false,
+        "text": "¥"
+      },
+      {
+        "dead": false,
+        "text": "Á"
+      }
+    ],
+    "17": [
+      {
+        "dead": false,
+        "text": "t"
+      },
+      {
+        "dead": false,
+        "text": "T"
+      },
+      {
+        "dead": false,
+        "text": "†"
+      },
+      {
+        "dead": false,
+        "text": "ˇ"
+      }
+    ],
+    "18": [
+      {
+        "dead": false,
+        "text": "1"
+      },
+      {
+        "dead": false,
+        "text": "!"
+      },
+      {
+        "dead": false,
+        "text": "¡"
+      },
+      {
+        "dead": false,
+        "text": "⁄"
+      }
+    ],
+    "19": [
+      {
+        "dead": false,
+        "text": "2"
+      },
+      {
+        "dead": false,
+        "text": "@"
+      },
+      {
+        "dead": false,
+        "text": "™"
+      },
+      {
+        "dead": false,
+        "text": "€"
+      }
+    ],
+    "20": [
+      {
+        "dead": false,
+        "text": "3"
+      },
+      {
+        "dead": false,
+        "text": "#"
+      },
+      {
+        "dead": false,
+        "text": "£"
+      },
+      {
+        "dead": false,
+        "text": "‹"
+      }
+    ],
+    "21": [
+      {
+        "dead": false,
+        "text": "4"
+      },
+      {
+        "dead": false,
+        "text": "$"
+      },
+      {
+        "dead": false,
+        "text": "¢"
+      },
+      {
+        "dead": false,
+        "text": "›"
+      }
+    ],
+    "22": [
+      {
+        "dead": false,
+        "text": "6"
+      },
+      {
+        "dead": false,
+        "text": "^"
+      },
+      {
+        "dead": false,
+        "text": "§"
+      },
+      {
+        "dead": false,
+        "text": "ﬂ"
+      }
+    ],
+    "23": [
+      {
+        "dead": false,
+        "text": "5"
+      },
+      {
+        "dead": false,
+        "text": "%"
+      },
+      {
+        "dead": false,
+        "text": "∞"
+      },
+      {
+        "dead": false,
+        "text": "ﬁ"
+      }
+    ],
+    "24": [
+      {
+        "dead": false,
+        "text": "="
+      },
+      {
+        "dead": false,
+        "text": "+"
+      },
+      {
+        "dead": false,
+        "text": "≠"
+      },
+      {
+        "dead": false,
+        "text": "±"
+      }
+    ],
+    "25": [
+      {
+        "dead": false,
+        "text": "9"
+      },
+      {
+        "dead": false,
+        "text": "("
+      },
+      {
+        "dead": false,
+        "text": "ª"
+      },
+      {
+        "dead": false,
+        "text": "·"
+      }
+    ],
+    "26": [
+      {
+        "dead": false,
+        "text": "7"
+      },
+      {
+        "dead": false,
+        "text": "&"
+      },
+      {
+        "dead": false,
+        "text": "¶"
+      },
+      {
+        "dead": false,
+        "text": "‡"
+      }
+    ],
+    "27": [
+      {
+        "dead": false,
+        "text": "-"
+      },
+      {
+        "dead": false,
+        "text": "_"
+      },
+      {
+        "dead": false,
+        "text": "–"
+      },
+      {
+        "dead": false,
+        "text": "—"
+      }
+    ],
+    "28": [
+      {
+        "dead": false,
+        "text": "8"
+      },
+      {
+        "dead": false,
+        "text": "*"
+      },
+      {
+        "dead": false,
+        "text": "•"
+      },
+      {
+        "dead": false,
+        "text": "°"
+      }
+    ],
+    "29": [
+      {
+        "dead": false,
+        "text": "0"
+      },
+      {
+        "dead": false,
+        "text": ")"
+      },
+      {
+        "dead": false,
+        "text": "º"
+      },
+      {
+        "dead": false,
+        "text": "‚"
+      }
+    ],
+    "30": [
+      {
+        "dead": false,
+        "text": "]"
+      },
+      {
+        "dead": false,
+        "text": "}"
+      },
+      {
+        "dead": false,
+        "text": "‘"
+      },
+      {
+        "dead": false,
+        "text": "’"
+      }
+    ],
+    "31": [
+      {
+        "dead": false,
+        "text": "o"
+      },
+      {
+        "dead": false,
+        "text": "O"
+      },
+      {
+        "dead": false,
+        "text": "ø"
+      },
+      {
+        "dead": false,
+        "text": "Ø"
+      }
+    ],
+    "32": [
+      {
+        "dead": false,
+        "text": "u"
+      },
+      {
+        "dead": false,
+        "text": "U"
+      },
+      {
+        "dead": true,
+        "text": "¨"
+      },
+      {
+        "dead": false,
+        "text": "¨"
+      }
+    ],
+    "33": [
+      {
+        "dead": false,
+        "text": "["
+      },
+      {
+        "dead": false,
+        "text": "{"
+      },
+      {
+        "dead": false,
+        "text": "“"
+      },
+      {
+        "dead": false,
+        "text": "”"
+      }
+    ],
+    "34": [
+      {
+        "dead": false,
+        "text": "i"
+      },
+      {
+        "dead": false,
+        "text": "I"
+      },
+      {
+        "dead": true,
+        "text": "ˆ"
+      },
+      {
+        "dead": false,
+        "text": "ˆ"
+      }
+    ],
+    "35": [
+      {
+        "dead": false,
+        "text": "p"
+      },
+      {
+        "dead": false,
+        "text": "P"
+      },
+      {
+        "dead": false,
+        "text": "π"
+      },
+      {
+        "dead": false,
+        "text": "∏"
+      }
+    ],
+    "37": [
+      {
+        "dead": false,
+        "text": "l"
+      },
+      {
+        "dead": false,
+        "text": "L"
+      },
+      {
+        "dead": false,
+        "text": "¬"
+      },
+      {
+        "dead": false,
+        "text": "Ò"
+      }
+    ],
+    "38": [
+      {
+        "dead": false,
+        "text": "j"
+      },
+      {
+        "dead": false,
+        "text": "J"
+      },
+      {
+        "dead": false,
+        "text": "∆"
+      },
+      {
+        "dead": false,
+        "text": "Ô"
+      }
+    ],
+    "39": [
+      {
+        "dead": false,
+        "text": "'"
+      },
+      {
+        "dead": false,
+        "text": "\""
+      },
+      {
+        "dead": false,
+        "text": "æ"
+      },
+      {
+        "dead": false,
+        "text": "Æ"
+      }
+    ],
+    "40": [
+      {
+        "dead": false,
+        "text": "k"
+      },
+      {
+        "dead": false,
+        "text": "K"
+      },
+      {
+        "dead": false,
+        "text": "˚"
+      },
+      {
+        "dead": false,
+        "text": ""
+      }
+    ],
+    "41": [
+      {
+        "dead": false,
+        "text": ";"
+      },
+      {
+        "dead": false,
+        "text": ":"
+      },
+      {
+        "dead": false,
+        "text": "…"
+      },
+      {
+        "dead": false,
+        "text": "Ú"
+      }
+    ],
+    "42": [
+      {
+        "dead": false,
+        "text": "\\"
+      },
+      {
+        "dead": false,
+        "text": "|"
+      },
+      {
+        "dead": false,
+        "text": "«"
+      },
+      {
+        "dead": false,
+        "text": "»"
+      }
+    ],
+    "43": [
+      {
+        "dead": false,
+        "text": ","
+      },
+      {
+        "dead": false,
+        "text": "<"
+      },
+      {
+        "dead": false,
+        "text": "≤"
+      },
+      {
+        "dead": false,
+        "text": "¯"
+      }
+    ],
+    "44": [
+      {
+        "dead": false,
+        "text": "/"
+      },
+      {
+        "dead": false,
+        "text": "?"
+      },
+      {
+        "dead": false,
+        "text": "÷"
+      },
+      {
+        "dead": false,
+        "text": "¿"
+      }
+    ],
+    "45": [
+      {
+        "dead": false,
+        "text": "n"
+      },
+      {
+        "dead": false,
+        "text": "N"
+      },
+      {
+        "dead": true,
+        "text": "˜"
+      },
+      {
+        "dead": false,
+        "text": "˜"
+      }
+    ],
+    "46": [
+      {
+        "dead": false,
+        "text": "m"
+      },
+      {
+        "dead": false,
+        "text": "M"
+      },
+      {
+        "dead": false,
+        "text": "µ"
+      },
+      {
+        "dead": false,
+        "text": "Â"
+      }
+    ],
+    "47": [
+      {
+        "dead": false,
+        "text": "."
+      },
+      {
+        "dead": false,
+        "text": ">"
+      },
+      {
+        "dead": false,
+        "text": "≥"
+      },
+      {
+        "dead": false,
+        "text": "˘"
+      }
+    ],
+    "50": [
+      {
+        "dead": false,
+        "text": "`"
+      },
+      {
+        "dead": false,
+        "text": "~"
+      },
+      {
+        "dead": true,
+        "text": "`"
+      },
+      {
+        "dead": false,
+        "text": "`"
+      }
+    ]
+  },
+  "source": "com.apple.keylayout.ABC"
+}
