@@ -577,3 +577,7 @@ aside .combo .combo-description { font-size: .85rem; }
 .screen-layer { fill: currentColor; font: 600 7px "Avenir Next", Avenir, sans-serif; letter-spacing: .15px; }
 
 .combo .combo-description { display: block; color: #c9ced8; font-size: 1rem; line-height: 1.5; margin-top: 5px; }
+
+.zmk-definition { margin-top: 12px; font-size: .85rem; }
+.zmk-definition h3 { margin: 0; font-size: inherit; font-weight: 500; color: #a7adb7; }
+.zmk-definition pre { margin: 6px 0 0; }
