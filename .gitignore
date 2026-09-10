@@ -3,3 +3,5 @@ zmk/
 modules/
 tools/
 .west/
+.DS_Store
+.serena
