@@ -1,21 +1,21 @@
 <!doctype html>
-<html lang="fr">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Zen — les couches</title>
+    <title>Zen — layers</title>
   </head>
   <body>
     <div id="app"></div>
-    <form class="keyboard-tester" aria-label="Tester le clavier" onsubmit="return false">
+    <form class="keyboard-tester" aria-label="Test your keyboard" onsubmit="return false">
       <div class="tester-heading">
-        <label for="keyboard-test">Tester le clavier</label>
-        <button type="reset" aria-label="Effacer le texte de test">Effacer</button>
+        <label for="keyboard-test">Test your keyboard</label>
+        <button type="reset" aria-label="Clear test text">Clear</button>
       </div>
-      <textarea id="keyboard-test" rows="2" placeholder="Clique ici et tape…"
+      <textarea id="keyboard-test" rows="2" placeholder="Click here and type…"
         spellcheck="false" autocapitalize="off" autocomplete="off"
         aria-describedby="keyboard-test-hint"></textarea>
-      <p id="keyboard-test-hint">Caractères reçus de ton clavier · texte conservé entre les vues</p>
+      <p id="keyboard-test-hint">Actual keyboard input · text stays when switching views</p>
     </form>
     <script type="module" src="/src/main.ts"></script>
   </body>

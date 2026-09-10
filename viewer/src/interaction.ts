@@ -15,10 +15,10 @@ export function activationRoute(layers: Layer[], target: number): Step[] {
       if (to < 0 || seen.has(to)) return
       seen.add(to)
       const mode = ['&mo', '&lt'].includes(behavior)
-        ? 'Maintenir'
+        ? 'Hold'
         : behavior === '&sl'
-          ? 'Une fois'
-          : 'Basculer'
+          ? 'One-shot'
+          : 'Toggle'
       queue.push({ layer: to, path: [...path, { from: layer, to, pos, mode }] })
     })
   }
@@ -106,7 +106,7 @@ export function modifiedDescription(binding: string, alt: boolean, shift: boolea
       .filter(([symbol, enabled]) => enabled || existing.includes(symbol as string))
       .map(([symbol]) => symbol).join('')
     return { ...original, label: prefix + base.slice(existing.length), dead: false,
-      detail: `${original.detail} · Combinaison de touches ; action selon l’application` }
+      detail: `${original.detail} · Keyboard shortcut; action depends on the application` }
   }
   if (!alt && !shift) return { ...original, dead: false }
   let code = ''
@@ -132,7 +132,7 @@ export function modifiedDescription(binding: string, alt: boolean, shift: boolea
     label: entry.text,
     dead: entry.dead,
     detail: entry.dead
-      ? `${original.detail} · Accent mort : attend le caractère suivant`
+      ? `${original.detail} · Dead key: waits for the next character`
       : original.detail,
   }
 }

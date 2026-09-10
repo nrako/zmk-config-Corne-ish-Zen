@@ -50,15 +50,15 @@ test('layer access is derived from bindings, not fixed positions', () => {
   assert.deepEqual(
     path(3).map(s => [s.pos, s.mode]),
     [
-      [40, 'Maintenir'],
-      [25, 'Une fois'],
+      [40, 'Hold'],
+      [25, 'One-shot'],
     ],
   )
   assert.deepEqual(
     path(4).map(s => [s.pos, s.mode]),
     [
-      [40, 'Maintenir'],
-      [26, 'Basculer'],
+      [40, 'Hold'],
+      [26, 'Toggle'],
     ],
   )
   const changed = structuredClone(data.layers)

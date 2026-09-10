@@ -1,8 +1,8 @@
 const labels: Record<string, string> = {
   TAB: 'Tab',
   ESC: 'Esc',
-  SPACE: 'Espace',
-  RET: 'Entrée',
+  SPACE: 'Space',
+  RET: 'Enter',
   BSPC: '⌫',
   LCTRL: '⌃',
   RCTRL: '⌃',
@@ -51,7 +51,7 @@ const labels: Record<string, string> = {
   C_FF: '⏭',
   C_VOL_DN: 'Vol −',
   C_VOL_UP: 'Vol +',
-  C_MUTE: 'Muet',
+  C_MUTE: 'Mute',
   C_BRI_DN: '☀ −',
   C_BRI_UP: '☀ +',
 }
@@ -72,68 +72,68 @@ export function describe(binding: string) {
   const basic = { label: '', sub: '', detail: '' }
   switch (behavior) {
     case '&kp':
-      return { ...basic, label: keyLabel(args.join(' ')), detail: 'Appui simple' }
+      return { ...basic, label: keyLabel(args.join(' ')), detail: 'Tap' }
     case '&none':
-      return { ...basic, label: '—', detail: 'Aucune action sur cette couche' }
+      return { ...basic, label: '—', detail: 'No action on this layer' }
     case '&trans':
       return {
         ...basic,
         label: '▽',
-        detail: 'Traverse vers la première couche active inférieure qui définit cette touche',
+        detail: 'Falls through to the first active lower layer that defines this key',
       }
     case '&lt':
       return {
         label: keyLabel(args[1]),
         sub: args[0],
-        detail: `Tap : ${keyLabel(args[1])} · Maintien : couche ${args[0]}`,
+        detail: `Tap: ${keyLabel(args[1])} · Hold: layer ${args[0]}`,
       }
     case '&mt':
       return {
         label: keyLabel(args[1]),
         sub: keyLabel(args[0]),
-        detail: `Tap : ${keyLabel(args[1])} · Maintien : ${keyLabel(args[0])}`,
+        detail: `Tap: ${keyLabel(args[1])} · Hold: ${keyLabel(args[0])}`,
       }
     case '&mo':
-      return { label: args[0], sub: 'maintenir', detail: `Active ${args[0]} pendant le maintien` }
+      return { label: args[0], sub: 'hold', detail: `Activates ${args[0]} while held` }
     case '&sl':
       return {
         label: args[0],
-        sub: 'une fois',
-        detail: `Active ${args[0]} pour la prochaine touche`,
+        sub: 'once',
+        detail: `Activates ${args[0]} for the next key`,
       }
     case '&tog':
-      return { label: args[0], sub: 'basculer', detail: `Active / désactive la couche ${args[0]}` }
+      return { label: args[0], sub: 'toggle', detail: `Toggles layer ${args[0]}` }
     case '&to':
-      return { label: args[0], sub: 'aller', detail: `Bascule vers ${args[0]}` }
+      return { label: args[0], sub: 'switch', detail: `Switches to ${args[0]}` }
     case '&bt':
       return {
         ...basic,
-        label: args[0] === 'BT_SEL' ? `BT ${Number(args[1]) + 1}` : 'BT effacer',
+        label: args[0] === 'BT_SEL' ? `BT ${Number(args[1]) + 1}` : 'BT clear',
         detail:
           args[0] === 'BT_SEL'
-            ? `Profil Bluetooth ${Number(args[1]) + 1}`
-            : 'Effacer les associations Bluetooth',
+            ? `Bluetooth profile ${Number(args[1]) + 1}`
+            : 'Clear Bluetooth pairings',
       }
     // Display hints only. The selected key also exposes its actual behavior definition.
     case '&gratab':
       return {
         label: 'Tab',
         sub: '⌥ `',
-        detail: 'Tab ; avec Alt gauche ou droit : Alt + accent grave',
+        detail: 'Tab; with left or right Alt: Alt + grave accent',
       }
     case '&rshiftcap':
-      return { label: '⇧', sub: 'mot ×2', detail: 'Shift droit ; double tap : Caps Word' }
+      return { label: '⇧', sub: 'word ×2', detail: 'Right Shift; double tap: Caps Word' }
     case '&wsp':
       return {
-        label: 'Micro',
-        sub: 'parler / tap',
-        detail: 'TypeWhisper : maintien pour parler, tap pour basculer',
+        label: 'Mic',
+        sub: 'hold / tap',
+        detail: 'TypeWhisper: hold to talk, tap to toggle',
       }
     default:
       return {
         ...basic,
         label: behavior.slice(1),
-        detail: 'Comportement personnalisé : consulter sa définition ci-dessous',
+        detail: 'Custom behavior: see its definition below',
       }
   }
 }
