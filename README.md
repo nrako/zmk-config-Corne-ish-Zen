@@ -1,6 +1,15 @@
 # Corne-ish Zen Custom Configuration
 
-![My Layout](layout.png)
+## Interactive layout
+
+**[Open the interactive keyboard viewer](https://nrako.github.io/zmk-config-Corne-ish-Zen/)**
+
+Explore all five layers, preview modifiers, and inspect key behaviors and combos.
+The viewer updates automatically when keymap changes reach `main`.
+
+[![Full-page preview of the keyboard viewer](docs/images/layout-viewer.png)](https://nrako.github.io/zmk-config-Corne-ish-Zen/)
+
+The image is a snapshot; the interactive viewer reflects the current keymap.
 
 > **Warning**
 >
