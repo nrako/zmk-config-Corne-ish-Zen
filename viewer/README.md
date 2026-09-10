@@ -32,7 +32,11 @@ failure cases. Nothing is deployed by these commands.
   geometry, layer selection and combo highlighting. Geometry is extracted from the supplied Figma SVG exports.
 - `viewer/src/style.css` contains the responsive graphite theme.
 
-Click a key (or focus it and press Enter/Space) for details. Hover or focus a
+Hover or focus a key for details; the panel remains reachable while hovered.
+Click a key (or press Enter/Space) to preview its action. Modifiers latch;
+layer keys select a layer preview. Hold a layer-tap for 200 ms to preview its
+layer; a short click previews its tap output. This is an exploration mode,
+not a full ZMK timing/stack emulator. Outputs are displayed, never executed. Hover or focus a
 combo in the panel to highlight its participating positions. Use the tabs or
 expand buttons to inspect one layer, and the overview to compare all five.
 

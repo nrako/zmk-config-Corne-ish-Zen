@@ -85,3 +85,14 @@ test('Ctrl and Command preview shortcuts without composing Option characters', (
   assert.equal(modifiedDescription('&mo NUM', false, false, true, true).label, 'NUM')
   assert.equal(modifiedDescription('&kp E', true, false, true).dead, false)
 })
+
+const {simulationAction}=loadTS('simulation')
+test('on-screen keys simulate modifiers, layers and tap/hold branches',()=>{
+ assert.equal(simulationAction('&kp RALT').modifier,'alt')
+ assert.equal(simulationAction('&kp LGUI').modifier,'cmd')
+ assert.equal(simulationAction('&mo NUM').name,'NUM')
+ assert.equal(simulationAction('&lt CODE SPACE').binding,'&kp SPACE')
+ assert.equal(simulationAction('&lt CODE SPACE',true).name,'CODE')
+ assert.equal(simulationAction('&mt LCTRL A',true).modifier,'ctrl')
+ assert.equal(simulationAction('&none').kind,'none')
+})

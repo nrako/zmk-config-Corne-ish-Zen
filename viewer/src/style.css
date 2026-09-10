@@ -480,3 +480,4 @@ aside.active {
 .screen {
   stroke-width: 0.8;
 }
+.simulation-status{font-size:12px;color:#b9c7dc;min-height:28px;padding:0 10px 12px}.key{touch-action:manipulation}

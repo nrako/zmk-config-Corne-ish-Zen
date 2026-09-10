@@ -1,6 +1,7 @@
 import data from 'virtual:keymap'
 import { describe } from './labels'
 import './style.css'
+import { simulationAction } from './simulation'
 import geometryData from './data/geometry.json'
 import { activationRoute, modifiedDescription } from './interaction'
 const app = document.querySelector<HTMLDivElement>('#app')!
@@ -17,6 +18,19 @@ const escape = (s: string) =>
     c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!,
   )
 let focused: number | null = null
+let lastAction = 'Clique pour essayer une touche. Maintiens une touche tap/hold pour son second geste.'
+let hoverTimer: ReturnType<typeof setTimeout> | undefined
+function hideDetails(){ selected=null; const panel=app.querySelector('aside');panel?.classList.remove('active');if(panel)panel.innerHTML=detail();app.querySelectorAll('.selected,.combo-active').forEach(k=>k.classList.remove('selected','combo-active')) }
+function scheduleHide(){clearTimeout(hoverTimer);hoverTimer=setTimeout(hideDetails,220)}
+function simulate(binding:string,hold=false){
+ const action=simulationAction(binding,hold)
+ selected=null
+ if(action.kind==='modifier'){latched[action.modifier]=!latched[action.modifier];lastAction='Modificateur '+action.modifier+(latched[action.modifier]?' activé':' relâché')}
+ else if(action.kind==='layer'){const layer=data.layers.findIndex(l=>l.name===action.name);if(layer>=0){focused=focused===layer?0:layer;lastAction='Aperçu de la couche '+data.layers[focused].name}}
+ else if(action.kind==='output'){lastAction='Sortie simulée : '+display(action.binding).label}
+ else lastAction='Aucune action'
+ render()
+}
 let selected: { layer: number; pos: number } | null = null
 type Modifier = 'alt' | 'shift' | 'ctrl' | 'cmd'
 const latched: Record<Modifier, boolean> = {alt:false,shift:false,ctrl:false,cmd:false}
@@ -60,7 +74,7 @@ function keyboard(layer: number) {
 }
 function detail() {
   if (!selected)
-    return '<span class="detail-hint">Clique sur une touche pour découvrir son comportement.</span>'
+    return '<span class="detail-hint">Survole une touche pour découvrir son comportement.</span>'
   const { layer, pos } = selected,
     raw = data.layers[layer].keys[pos],
     inherited = raw === '&trans'
@@ -71,7 +85,7 @@ function detail() {
   return `<button class="close-detail" aria-label="Fermer les détails">×</button><div class="detail-title"><span>${escape(data.layers[layer].name)} / touche ${pos}</span><strong>${escape(d.label)}</strong></div><p>${escape(d.detail)}</p>${inherited ? '<p class="muted">Transparente : légende de base affichée comme repère. Le résultat réel dépend des couches inférieures actives.</p>' : ''}${combos.length ? `<div class="combo-list">${combos.map(c => `<button class="combo" data-combo="${escape(c.name)}">${c.positions.map(p => escape(describe(data.layers[0].keys[p]).label)).join(' + ')} <span>→ ${escape(describe(c.binding).label)}</span></button>`).join('')}</div>` : ''}<details><summary>Définition ZMK</summary><pre>${escape(raw)}${behavior ? '\n\n' + escape(behavior) : ''}</pre></details>`
 }
 function render() {
-  app.innerHTML = `<header><a class="wordmark" href="#" aria-label="Toutes les couches">zen<span> / </span></a><div class="intro"><h1>Les touches, en clair.</h1><p>Corne-ish Zen · ton aide-mémoire</p></div><button id="overview" ${focused === null ? 'hidden' : ''}>Toutes les couches</button></header><nav aria-label="Couches"><button data-focus="all" aria-pressed="${focused === null}">Vue d’ensemble</button>${data.layers.map((l, i) => `<button data-focus="${i}" aria-pressed="${focused === i}">${escape(l.name)}</button>`).join('')}</nav><div class="modifiers" aria-label="Modificateurs"><span>Voir avec</span><button data-mod="alt" aria-pressed="${modifiers().alt}">⌥ Alt</button><button data-mod="shift" aria-pressed="${modifiers().shift}">⇧ Shift</button><button data-mod="ctrl" aria-pressed="${modifiers().ctrl}">⌃ Ctrl</button><button data-mod="cmd" aria-pressed="${modifiers().cmd}">⌘ Cmd</button><span class="modifier-note">ABC macOS · clic ou maintien au clavier</span></div><main class="${focused !== null ? 'focused' : ''}">${data.layers.map((l, i) => (focused !== null && focused !== i ? '' : `<section class="layer"><div class="layer-heading"><div><h2><span>${i}</span>${escape(l.name)}</h2><p>${subtitles[i] ?? ''}</p>${i ? `<p class="route">${escape(routeDescription(i))}</p>` : ''}</div><button class="expand" data-focus="${i}" aria-label="Agrandir ${escape(l.name)}">↗</button></div>${keyboard(i)}</section>`)).join('')}<section class="guide"><h2>Retrouver un geste</h2><p>La légende principale indique l’appui. En dessous, le maintien ou le second geste.</p><div class="legend-guide"><span><i></i>Action de la couche</span><span><i class="dim"></i>Transparente</span><span><i class="red"></i>Accès à la couche</span></div><p class="muted">Rouge : touches d’accès, pointillés : bascule ou activation ponctuelle. Souligné : accent mort. Les touches transparentes montrent QWERTY comme repère, pas une simulation de couches empilées.</p></section></main><aside class="${selected ? 'active' : ''}" aria-live="polite">${detail()}</aside><footer>42 touches. Cinq couches. Un seul Zen.<span>Lecture seule · synchronisé avec la keymap</span></footer>`
+  app.innerHTML = `<header><a class="wordmark" href="#" aria-label="Toutes les couches">zen<span> / </span></a><div class="intro"><h1>Les touches, en clair.</h1><p>Corne-ish Zen · ton aide-mémoire</p></div><button id="overview" ${focused === null ? 'hidden' : ''}>Toutes les couches</button></header><nav aria-label="Couches"><button data-focus="all" aria-pressed="${focused === null}">Vue d’ensemble</button>${data.layers.map((l, i) => `<button data-focus="${i}" aria-pressed="${focused === i}">${escape(l.name)}</button>`).join('')}</nav><div class="modifiers" aria-label="Modificateurs"><span>Voir avec</span><button data-mod="alt" aria-pressed="${modifiers().alt}">⌥ Alt</button><button data-mod="shift" aria-pressed="${modifiers().shift}">⇧ Shift</button><button data-mod="ctrl" aria-pressed="${modifiers().ctrl}">⌃ Ctrl</button><button data-mod="cmd" aria-pressed="${modifiers().cmd}">⌘ Cmd</button><span class="modifier-note">ABC macOS · clic ou maintien au clavier</span></div><div class="simulation-status" role="status">${escape(lastAction)}</div><main class="${focused !== null ? 'focused' : ''}">${data.layers.map((l, i) => (focused !== null && focused !== i ? '' : `<section class="layer"><div class="layer-heading"><div><h2><span>${i}</span>${escape(l.name)}</h2><p>${subtitles[i] ?? ''}</p>${i ? `<p class="route">${escape(routeDescription(i))}</p>` : ''}</div><button class="expand" data-focus="${i}" aria-label="Agrandir ${escape(l.name)}">↗</button></div>${keyboard(i)}</section>`)).join('')}<section class="guide"><h2>Retrouver un geste</h2><p>La légende principale indique l’appui. En dessous, le maintien ou le second geste.</p><div class="legend-guide"><span><i></i>Action de la couche</span><span><i class="dim"></i>Transparente</span><span><i class="red"></i>Accès à la couche</span></div><p class="muted">Rouge : touches d’accès, pointillés : bascule ou activation ponctuelle. Souligné : accent mort. Les touches transparentes montrent QWERTY comme repère, pas une simulation de couches empilées.</p></section></main><aside class="${selected ? 'active' : ''}" aria-live="polite">${detail()}</aside><footer>42 touches. Cinq couches. Un seul Zen.<span>Lecture seule · synchronisé avec la keymap</span></footer>`
   app.querySelectorAll<HTMLButtonElement>('[data-mod]').forEach(
     button =>
       (button.onclick = () => {
@@ -101,22 +115,23 @@ function render() {
     overview()
   }
   app.querySelectorAll<SVGGElement>('.key').forEach(k => {
-    const choose = () => {
-      selected = { layer: Number(k.dataset.layer), pos: Number(k.dataset.pos) }
-      app.querySelector('aside')!.innerHTML = detail()
-      app.querySelector('aside')!.classList.add('active')
-      app.querySelectorAll('.selected').forEach(x => x.classList.remove('selected'))
-      k.classList.add('selected')
-      wireCombos()
-    }
-    k.onclick = choose
-    k.onkeydown = e => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault()
-        choose()
-      }
-    }
+    const layer=Number(k.dataset.layer),pos=Number(k.dataset.pos)
+    const raw=data.layers[layer].keys[pos]
+    const binding=raw==='&trans'?data.layers[0].keys[pos]:raw
+    const inspect=()=>{clearTimeout(hoverTimer);selected={layer,pos};app.querySelector('aside')!.innerHTML=detail();app.querySelector('aside')!.classList.add('active');app.querySelectorAll('.selected').forEach(x=>x.classList.remove('selected'));k.classList.add('selected');wireCombos()}
+    k.onmouseenter=inspect;k.onmouseleave=scheduleHide;k.onfocus=inspect;k.onblur=scheduleHide
+    let holdTimer:ReturnType<typeof setTimeout>|undefined,held=false
+    k.onpointerdown=e=>{if(e.button!==0)return;held=false;if(/^&(lt|mt) /.test(binding)){
+      holdTimer=setTimeout(()=>{held=true;simulate(binding,true)},200)
+      window.addEventListener('pointerup',()=>clearTimeout(holdTimer),{once:true})
+      window.addEventListener('pointercancel',()=>clearTimeout(holdTimer),{once:true})
+    }}
+    k.onclick=()=>{clearTimeout(holdTimer);if(!held)simulate(binding)}
+    k.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();simulate(binding)}}
   })
+  const panel=app.querySelector<HTMLElement>('aside')!
+  panel.onmouseenter=()=>clearTimeout(hoverTimer);panel.onmouseleave=scheduleHide
+  panel.addEventListener('focusin',()=>clearTimeout(hoverTimer));panel.addEventListener('focusout',scheduleHide)
   wireCombos()
 }
 function wireCombos() {
