@@ -569,7 +569,8 @@ aside .layer-combos .combo { font-size: .9rem; }
 aside .layer-combos kbd { width: 2rem; height: 2rem; font-size: .8rem; }
 aside .combo .combo-description { font-size: .85rem; }
 @media (max-width: 950px) {
-  aside.active { bottom: 15rem; }
+  .keyboard-tester { display: none; }
+  #app { padding-bottom: 0; }
 }
 
 .screen-content { color: #000; pointer-events: none; }
