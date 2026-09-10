@@ -139,7 +139,7 @@ main {
   stroke-width: 1.5;
 }
 .screen {
-  fill: #191c21;
+  fill: #d4d4cd;
   stroke: #383e47;
 }
 .key {
@@ -562,5 +562,5 @@ aside .layer-combos { margin: 16px 0; }
 #app { padding-bottom: 15rem; }
 aside.active { bottom: 15rem; }
 
-.screen-content { color: #b4bdc8; pointer-events: none; }
+.screen-content { color: #000; pointer-events: none; }
 .screen-layer { fill: currentColor; font: 600 7px "Avenir Next", Avenir, sans-serif; letter-spacing: .15px; }
