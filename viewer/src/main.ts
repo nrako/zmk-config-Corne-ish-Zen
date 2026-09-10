@@ -46,11 +46,29 @@ function routeDescription(layer: number) {
     .map(step => `${step.mode} ${data.layers[step.to].name} (${step.pos})`)
     .join(' → ')
 }
+function screenContent(layer: number, side: number) {
+  const screen = geometryData.halves[side].screen
+  const cx = Number(screen.x) + Number(screen.width) / 2
+  const y = Number(screen.y)
+  return `<g class="screen-content" aria-hidden="true">
+    ${side === 0 ? `<text class="screen-layer" x="${cx}" y="${y + 17}" text-anchor="middle">${escape(data.layers[layer].name)}</text>` : ''}
+    <svg x="${cx - 9}" y="${y + 30}" width="18" height="18" viewBox="0 0 256 256">
+      <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16">
+        <polygon points="128 32 192 80 128 128 128 32"/>
+        <polygon points="128 128 192 176 128 224 128 128"/>
+        <line x1="64" y1="80" x2="128" y2="128"/>
+        <line x1="64" y1="176" x2="128" y2="128"/>
+      </g>
+      <circle cx="60" cy="128" r="12" fill="currentColor"/>
+      <circle cx="204" cy="128" r="12" fill="currentColor"/>
+    </svg>
+  </g>`
+}
 function keyboard(layer: number) {
   const keys = data.layers[layer].keys
   const route = activationRoute(data.layers, layer)
   return `<div class="keyboard-scroll"><svg class="keyboard" viewBox="-3 -3 766 253" aria-label="Clavier ${escape(data.layers[layer].name)}">
- ${geometryData.halves.map((half, i) => `<g transform="translate(${i * halfOffset} 0)"><path class="case" d="${half.outline}"/><rect class="screen" x="${half.screen.x}" y="${half.screen.y}" width="${half.screen.width}" height="${half.screen.height}" rx="${half.screen.rx}"/></g>`).join('')}
+ ${geometryData.halves.map((half, i) => `<g transform="translate(${i * halfOffset} 0)"><path class="case" d="${half.outline}"/><rect class="screen" x="${half.screen.x}" y="${half.screen.y}" width="${half.screen.width}" height="${half.screen.height}" rx="${half.screen.rx}"/>${screenContent(layer, i)}</g>`).join('')}
  ${keys
    .map((raw, pos) => {
      const inherited = raw === '&trans'
