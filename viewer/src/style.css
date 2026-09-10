@@ -500,7 +500,7 @@ aside.active {
 aside .layer-combos { margin: 16px 0; }
 
 .guide .combo-reminder { margin: 0 0 28px; padding: 0; border: 0; }
-.combo-reminder .combo-list { display: grid; gap: 7px; }
-.combo-reminder .combo { width: fit-content; border-color: transparent; padding: 5px 0; text-align: left; }
-.combo-reminder kbd { display: inline-block; padding: 4px 7px; background: #101113; border-radius: 5px; }
+.layer-combos .combo-list { display: grid; gap: 7px; }
+.layer-combos .combo { width: fit-content; border-color: transparent; padding: 5px 0; text-align: left; }
+.layer-combos kbd { display: inline-block; padding: 4px 7px; background: #101113; border-radius: 5px; }
 .guide .combo-reminder p { font-size: 12px; line-height: 1.5; }
