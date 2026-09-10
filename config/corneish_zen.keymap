@@ -36,10 +36,17 @@
   };
   combos {
     compatible = "zmk,combos";
-    combo._esc {
+    combo_esc {
       key-positions = <0 1>;
       timeout-ms = <60>;
-      layers = <0 1 2>;
+      layers = <QWERTY NUM CODE>;
+      bindings = <&kp ESC>;
+    };
+    // Right-hand Escape on the home row (J K L semicolon).
+    combo_right_esc {
+      key-positions = <19 20 21 22>;
+      timeout-ms = <60>;
+      layers = <QWERTY>;
       bindings = <&kp ESC>;
     };
     combo_scrnsht_all {
@@ -104,16 +111,6 @@
       tapping-term-ms = <300>;
       bindings = <&mo NUM>, <&to NUPAD>;
     };
-    // hold-tap: hold = right alt (feeds gratab grave morph), tap = esc
-    esc_ralt: esc_right_alt {
-      compatible = "zmk,behavior-hold-tap";
-      label = "ESC_RALT";
-      #binding-cells = <2>;
-      tapping-term-ms = <180>;
-      quick-tap-ms = <0>;
-      flavor = "tap-preferred";
-      bindings = <&kp>, <&kp>;
-    };
     // TypeWhisper on one key (CODE pos 15): hold = ptt macro (Hyper+Q held
     // for push-to-talk), tap = Hyper+W (toggle). First param feeds ptt and is
     // ignored; second is the tap chord.
@@ -135,7 +132,7 @@
 // | TAB ⌥ (`) |  Q  |  W  |  E  |  R  |  T    |      |  Y  |  U   |  I    |  O  |  P  | BKSP  |
 // |   CTRL    |  A  |  S  |  D  |  F  |  G    |      |  H  |  J   |  K    |  L  |  ;  |  '    |
 // |   SHFT    |  Z  |  X  |  C  |  V  |  B    |      |  N  |  M   |  ,    |  .  |  /  | SHFT  |
-//                         |  ⌥  |  ⌘  | SPC 2 |      | RET | NUM  | ESC ⌥ |
+//                         |  ⌥  |  ⌘  | SPC 2 |      | RET | NUM  |   ⌥   |
       bindings = <
 // ╭─────────────┬─────────────┬─────────────┬──────────────┬──────────────┬──────────────╮   ╭──────────────┬──────────────┬──────────────┬──────────────┬──────────────┬──────────────╮
      &gratab       &kp Q         &kp W         &kp E          &kp R          &kp T              &kp Y          &kp U          &kp I          &kp O          &kp P          &kp BSPC
@@ -144,7 +141,7 @@
 // ├─────────────┼─────────────┼─────────────┼──────────────┼──────────────┼──────────────┤   ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤
      &kp LSHFT     &kp Z         &kp X         &kp C          &kp V          &kp B              &kp N          &kp M          &kp COMMA      &kp DOT        &kp FSLH       &rshiftcap
 // ╰─────────────┴─────────────┴─────────────┼──────────────┼──────────────┼──────────────┤   ├──────────────┼──────────────┼──────────────┼──────────────┴──────────────┴──────────────╯
-                                               &kp LALT       &kp LGUI       &lt CODE SPACE     &kp RET        &mo NUM        &esc_ralt RALT ESC
+                                               &kp LALT       &kp LGUI       &lt CODE SPACE     &kp RET        &mo NUM        &kp RALT
 //                                           ╰──────────────┴──────────────┴──────────────╯   ╰──────────────┴──────────────┴──────────────╯
       >;
     };
@@ -154,16 +151,16 @@
 
 // ----------------------------------------------------------------------------------
 // | TAB  |  1   |  2     |    3     |  4  |  5  |      |  6  |  7   |  8    |  9  |  0  | BKSP   |
-// | CTRL |  |<  |  ▶II   |    >|    | V↓  | V↑  |      | LFT | DWN  |  UP   | RGT | HOM | T NUPAD|
-// | SHFT | S FN |        | T QWERTY | ☀️↓ | ☀️↑ |      | ▶II | VM   |  ,    |  .  | END | SHFT   |
-//                        |  ⌥       |  ⌘  | SPC |      | RET | NUM  | ESC ⌥ |
+// | CTRL |  |<  |  ▶II   |    >|    | V↓  | V↑  |      | LFT | DWN  |  UP   | RGT | HOM | ESC    |
+// | SHFT | S FN |T NUPAD | T QWERTY | ☀️↓ | ☀️↑ |      | ▶II | VM   |  ,    |  .  | END | SHFT   |
+//                        |  ⌥       |  ⌘  | SPC |      | RET | NUM  |   ⌥   |
       bindings = <
 // ╭─────────────┬─────────────┬─────────────┬──────────────┬──────────────┬──────────────╮   ╭──────────────┬──────────────┬──────────────┬──────────────┬──────────────┬──────────────╮
      &trans        &kp N1        &kp N2        &kp N3         &kp N4         &kp N5             &kp N6         &kp N7         &kp N8         &kp N9         &kp N0         &trans
 // ├─────────────┼─────────────┼─────────────┼──────────────┼──────────────┼──────────────┤   ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤
-     &trans        &kp C_PREV    &kp C_PP      &kp C_FF       &kp C_VOL_DN   &kp C_VOL_UP       &kp LEFT       &kp DOWN       &kp UP         &kp RIGHT      &kp HOME       &tog NUPAD
+     &trans        &kp C_PREV    &kp C_PP      &kp C_FF       &kp C_VOL_DN   &kp C_VOL_UP       &kp LEFT       &kp DOWN       &kp UP         &kp RIGHT      &kp HOME       &kp ESC
 // ├─────────────┼─────────────┼─────────────┼──────────────┼──────────────┼──────────────┤   ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤
-     &trans        &sl FN        &none         &tog QWERTY    &kp C_BRI_DN   &kp C_BRI_UP       &mt C_FF C_PP  &kp C_MUTE     &trans         &trans         &kp END        &trans
+     &trans        &sl FN        &tog NUPAD         &tog QWERTY    &kp C_BRI_DN   &kp C_BRI_UP       &mt C_FF C_PP  &kp C_MUTE     &trans         &trans         &kp END        &trans
 // ╰─────────────┴─────────────┴─────────────┼──────────────┼──────────────┼──────────────┤   ├──────────────┼──────────────┼──────────────┼──────────────┴──────────────┴──────────────╯
                                                &trans         &trans         &kp SPACE          &trans         &trans         &trans
 //                                           ╰──────────────┴──────────────┴──────────────╯   ╰──────────────┴──────────────┴──────────────╯
@@ -177,7 +174,7 @@
 // |  `   |  !  |  @  |  #  |  $  |  %    |      |  ^  |  &  |  *  |  (  |  )  | BKSP |
 // | CTRL |     |     | 🎙  |     |       |      |  -  |  =  |  [  |  ]  |  \  |  "|" |
 // | SHFT | 😀  |     |     |     |       |      |  _  |  +  |  {  |  }  |  /  |  ~   |
-//                    |  ⌥  |  ⌘  | SPC 2 |      | RET |  ⌘  | ESC ⌥ |
+//                    |  ⌥  |  ⌘  | SPC 2 |      | RET |  ⌘  |   ⌥   |
       bindings = <
 // ╭─────────────┬─────────────┬─────────────┬──────────────┬──────────────┬──────────────╮   ╭──────────────┬──────────────┬──────────────┬──────────────┬──────────────┬──────────────╮
      &kp GRAVE     &kp EXCL      &kp AT        &kp HASH       &kp DLLR       &kp PRCNT          &kp CARET      &kp AMPS       &kp KP_MULTIPLY &kp LPAR       &kp RPAR       &trans
@@ -219,7 +216,7 @@
 // | TAB  |      |        |          |     |     |      |  /  |  7   |  8    |  9  |  +  | BKSP |
 // | CTRL |  |<  |  ▶II   |    >|    | V↓  | V↑  |      |  *  |  4   |  5    |  6  |  -  | TAB  |
 // | SHFT | S FN |        | T QWERTY | ☀️↓ | ☀️↑ |      |  0  |  1   |  2    |  3  |  .  | RET  |
-//                        |  ⌥       |  ⌘  | SPC |      | RET | NUM  | ESC ⌥ |
+//                        |  ⌥       |  ⌘  | SPC |      | RET | NUM  |   ⌥   |
       bindings = <
 // ╭─────────────┬─────────────┬─────────────┬──────────────┬──────────────┬──────────────╮   ╭──────────────┬──────────────┬──────────────┬──────────────┬──────────────┬──────────────╮
      &trans        &none         &none         &none          &none          &none              &kp FSLH       &kp N7         &kp N8         &kp N9         &kp PLUS       &trans
