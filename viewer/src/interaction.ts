@@ -97,8 +97,17 @@ const shifted: Record<string, string> = {
   QMARK: 'FSLH',
   TILDE: 'GRAVE',
 }
-export function modifiedDescription(binding: string, alt: boolean, shift: boolean) {
+export function modifiedDescription(binding: string, alt: boolean, shift: boolean, ctrl = false, cmd = false) {
   const original = describe(binding)
+  if ((ctrl || cmd) && (/^&(kp|lt|mt) /.test(binding) || binding === '&gratab') && !/^&kp [LR](CTRL|GUI|ALT|SHFT)$/.test(binding)) {
+    const base = binding === '&gratab' && alt ? '`' : original.label
+    const existing = base.match(/^[⌃⌥⇧⌘]+/)?.[0] ?? ''
+    const prefix = [['⌃', ctrl], ['⌥', alt], ['⇧', shift], ['⌘', cmd]]
+      .filter(([symbol, enabled]) => enabled || existing.includes(symbol as string))
+      .map(([symbol]) => symbol).join('')
+    return { ...original, label: prefix + base.slice(existing.length), dead: false,
+      detail: `${original.detail} · Combinaison de touches ; action selon l’application` }
+  }
   if (!alt && !shift) return { ...original, dead: false }
   let code = ''
   if (binding === '&gratab') code = alt ? 'GRAVE' : ''

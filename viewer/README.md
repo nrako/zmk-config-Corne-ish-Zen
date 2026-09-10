@@ -57,10 +57,12 @@ swift scripts/export-abc.swift > /tmp/abc.json
 # Inspect the export before replacing viewer/src/data/abc.json.
 ```
 
-Alt and Shift buttons latch a preview; physical modifiers also activate it while
+Alt, Shift, Ctrl and Cmd buttons latch a preview; physical modifiers also activate it while
 this page receives their events. Physical state clears on blur or page hiding.
 This is a character preview, not execution of shortcuts or a firmware emulator.
-Existing chords containing Command/Control retain their shortcut legends. The
+With Ctrl/Cmd active, legends show shortcut chords rather than Option character
+composition. Existing chord modifiers are not duplicated. OS/browser reserved
+shortcuts remain untouched; the viewer never prevents their default actions. The
 dotted underline identifies a dead accent, not a composed character.
 
 Red access keys and paths are discovered from layer bindings starting at QWERTY.

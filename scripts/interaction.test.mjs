@@ -75,3 +75,13 @@ test('exported geometry has exact source key sizes and thumb angles', () => {
   assert.equal(geometry.keys[39].angle, -30)
   assert.ok(geometry.halves.every(h => h.outline.includes('C')))
 })
+
+test('Ctrl and Command preview shortcuts without composing Option characters', () => {
+  assert.equal(modifiedDescription('&kp A', false, false, true).label, '⌃A')
+  assert.equal(modifiedDescription('&kp A', true, true, false, true).label, '⌥⇧⌘A')
+  assert.equal(modifiedDescription('&kp LG(BSPC)', false, false, false, true).label, '⌘⌫')
+  assert.equal(modifiedDescription('&gratab', true, false, false, true).label, '⌥⌘`')
+  assert.equal(modifiedDescription('&kp LGUI', false, false, false, true).label, '⌘')
+  assert.equal(modifiedDescription('&mo NUM', false, false, true, true).label, 'NUM')
+  assert.equal(modifiedDescription('&kp E', true, false, true).dead, false)
+})

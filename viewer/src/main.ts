@@ -18,14 +18,13 @@ const escape = (s: string) =>
   )
 let focused: number | null = null
 let selected: { layer: number; pos: number } | null = null
-let latchedAlt = false,
-  latchedShift = false,
-  physicalAlt = false,
-  physicalShift = false
-const modifiers = () => ({ alt: latchedAlt || physicalAlt, shift: latchedShift || physicalShift })
+type Modifier = 'alt' | 'shift' | 'ctrl' | 'cmd'
+const latched: Record<Modifier, boolean> = {alt:false,shift:false,ctrl:false,cmd:false}
+const physical: Record<Modifier, boolean> = {alt:false,shift:false,ctrl:false,cmd:false}
+const modifiers = () => ({alt:latched.alt||physical.alt,shift:latched.shift||physical.shift,ctrl:latched.ctrl||physical.ctrl,cmd:latched.cmd||physical.cmd})
 function display(binding: string) {
   const m = modifiers()
-  return modifiedDescription(binding, m.alt, m.shift)
+  return modifiedDescription(binding, m.alt, m.shift, m.ctrl, m.cmd)
 }
 const halfOffset = 397
 function routeDescription(layer: number) {
@@ -50,6 +49,8 @@ function keyboard(layer: number) {
        : d.sub
      const m = modifiers()
      const heldModifier =
+       (m.ctrl && /&kp [LR]CTRL$/.test(binding)) ||
+       (m.cmd && /&kp [LR]GUI$/.test(binding)) ||
        (m.alt && /&kp [LR]ALT$/.test(binding)) ||
        (m.shift && (/&kp [LR]SHFT$/.test(binding) || binding === '&rshiftcap'))
      const active = selected?.layer === layer && selected.pos === pos
@@ -70,12 +71,12 @@ function detail() {
   return `<button class="close-detail" aria-label="Fermer les détails">×</button><div class="detail-title"><span>${escape(data.layers[layer].name)} / touche ${pos}</span><strong>${escape(d.label)}</strong></div><p>${escape(d.detail)}</p>${inherited ? '<p class="muted">Transparente : légende de base affichée comme repère. Le résultat réel dépend des couches inférieures actives.</p>' : ''}${combos.length ? `<div class="combo-list">${combos.map(c => `<button class="combo" data-combo="${escape(c.name)}">${c.positions.map(p => escape(describe(data.layers[0].keys[p]).label)).join(' + ')} <span>→ ${escape(describe(c.binding).label)}</span></button>`).join('')}</div>` : ''}<details><summary>Définition ZMK</summary><pre>${escape(raw)}${behavior ? '\n\n' + escape(behavior) : ''}</pre></details>`
 }
 function render() {
-  app.innerHTML = `<header><a class="wordmark" href="#" aria-label="Toutes les couches">zen<span> / </span></a><div class="intro"><h1>Les touches, en clair.</h1><p>Corne-ish Zen · ton aide-mémoire</p></div><button id="overview" ${focused === null ? 'hidden' : ''}>Toutes les couches</button></header><nav aria-label="Couches"><button data-focus="all" aria-pressed="${focused === null}">Vue d’ensemble</button>${data.layers.map((l, i) => `<button data-focus="${i}" aria-pressed="${focused === i}">${escape(l.name)}</button>`).join('')}</nav><div class="modifiers" aria-label="Modificateurs"><span>Voir avec</span><button data-mod="alt" aria-pressed="${modifiers().alt}">⌥ Alt</button><button data-mod="shift" aria-pressed="${modifiers().shift}">⇧ Shift</button><span class="modifier-note">ABC macOS · clic ou maintien au clavier</span></div><main class="${focused !== null ? 'focused' : ''}">${data.layers.map((l, i) => (focused !== null && focused !== i ? '' : `<section class="layer"><div class="layer-heading"><div><h2><span>${i}</span>${escape(l.name)}</h2><p>${subtitles[i] ?? ''}</p>${i ? `<p class="route">${escape(routeDescription(i))}</p>` : ''}</div><button class="expand" data-focus="${i}" aria-label="Agrandir ${escape(l.name)}">↗</button></div>${keyboard(i)}</section>`)).join('')}<section class="guide"><h2>Retrouver un geste</h2><p>La légende principale indique l’appui. En dessous, le maintien ou le second geste.</p><div class="legend-guide"><span><i></i>Action de la couche</span><span><i class="dim"></i>Transparente</span><span><i class="red"></i>Accès à la couche</span></div><p class="muted">Rouge : touches d’accès, pointillés : bascule ou activation ponctuelle. Souligné : accent mort. Les touches transparentes montrent QWERTY comme repère, pas une simulation de couches empilées.</p></section></main><aside class="${selected ? 'active' : ''}" aria-live="polite">${detail()}</aside><footer>42 touches. Cinq couches. Un seul Zen.<span>Lecture seule · synchronisé avec la keymap</span></footer>`
+  app.innerHTML = `<header><a class="wordmark" href="#" aria-label="Toutes les couches">zen<span> / </span></a><div class="intro"><h1>Les touches, en clair.</h1><p>Corne-ish Zen · ton aide-mémoire</p></div><button id="overview" ${focused === null ? 'hidden' : ''}>Toutes les couches</button></header><nav aria-label="Couches"><button data-focus="all" aria-pressed="${focused === null}">Vue d’ensemble</button>${data.layers.map((l, i) => `<button data-focus="${i}" aria-pressed="${focused === i}">${escape(l.name)}</button>`).join('')}</nav><div class="modifiers" aria-label="Modificateurs"><span>Voir avec</span><button data-mod="alt" aria-pressed="${modifiers().alt}">⌥ Alt</button><button data-mod="shift" aria-pressed="${modifiers().shift}">⇧ Shift</button><button data-mod="ctrl" aria-pressed="${modifiers().ctrl}">⌃ Ctrl</button><button data-mod="cmd" aria-pressed="${modifiers().cmd}">⌘ Cmd</button><span class="modifier-note">ABC macOS · clic ou maintien au clavier</span></div><main class="${focused !== null ? 'focused' : ''}">${data.layers.map((l, i) => (focused !== null && focused !== i ? '' : `<section class="layer"><div class="layer-heading"><div><h2><span>${i}</span>${escape(l.name)}</h2><p>${subtitles[i] ?? ''}</p>${i ? `<p class="route">${escape(routeDescription(i))}</p>` : ''}</div><button class="expand" data-focus="${i}" aria-label="Agrandir ${escape(l.name)}">↗</button></div>${keyboard(i)}</section>`)).join('')}<section class="guide"><h2>Retrouver un geste</h2><p>La légende principale indique l’appui. En dessous, le maintien ou le second geste.</p><div class="legend-guide"><span><i></i>Action de la couche</span><span><i class="dim"></i>Transparente</span><span><i class="red"></i>Accès à la couche</span></div><p class="muted">Rouge : touches d’accès, pointillés : bascule ou activation ponctuelle. Souligné : accent mort. Les touches transparentes montrent QWERTY comme repère, pas une simulation de couches empilées.</p></section></main><aside class="${selected ? 'active' : ''}" aria-live="polite">${detail()}</aside><footer>42 touches. Cinq couches. Un seul Zen.<span>Lecture seule · synchronisé avec la keymap</span></footer>`
   app.querySelectorAll<HTMLButtonElement>('[data-mod]').forEach(
     button =>
       (button.onclick = () => {
-        if (button.dataset.mod === 'alt') latchedAlt = !latchedAlt
-        else latchedShift = !latchedShift
+        const modifier=button.dataset.mod as Modifier
+        latched[modifier]=!latched[modifier]
         const name = button.dataset.mod
         render()
         app.querySelector<HTMLButtonElement>(`[data-mod="${name}"]`)?.focus()
@@ -148,22 +149,20 @@ function wireCombos() {
 }
 render()
 
-function updatePhysical(event: KeyboardEvent, down: boolean) {
-  if (event.key !== 'Alt' && event.key !== 'Shift') return
-  const before = JSON.stringify(modifiers())
-  if (event.key === 'Alt') physicalAlt = down
-  else physicalShift = down
-  if (before !== JSON.stringify(modifiers())) render()
+function updatePhysical(event: KeyboardEvent) {
+  const before=JSON.stringify(modifiers())
+  physical.alt=event.altKey
+  physical.shift=event.shiftKey
+  physical.ctrl=event.ctrlKey
+  physical.cmd=event.metaKey
+  if(before!==JSON.stringify(modifiers()))render()
 }
-window.addEventListener('keydown', e => updatePhysical(e, true))
-window.addEventListener('keyup', e => updatePhysical(e, false))
+window.addEventListener('keydown',updatePhysical)
+window.addEventListener('keyup',updatePhysical)
 function clearPhysical() {
-  const changed = physicalAlt || physicalShift
-  physicalAlt = false
-  physicalShift = false
-  if (changed) render()
+  const changed=Object.values(physical).some(Boolean)
+  for(const key of Object.keys(physical) as Modifier[])physical[key]=false
+  if(changed)render()
 }
-window.addEventListener('blur', clearPhysical)
-document.addEventListener('visibilitychange', () => {
-  if (document.hidden) clearPhysical()
-})
+window.addEventListener('blur',clearPhysical)
+document.addEventListener('visibilitychange',()=>{if(document.hidden)clearPhysical()})
