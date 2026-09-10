@@ -96,3 +96,11 @@ test('on-screen keys simulate modifiers, layers and tap/hold branches',()=>{
  assert.equal(simulationAction('&mt LCTRL A',true).modifier,'ctrl')
  assert.equal(simulationAction('&none').kind,'none')
 })
+
+const { comboDescription } = loadTS('labels')
+test('combo explanations follow emitted bindings and retain unknown behavior details', () => {
+  assert.equal(comboDescription('&kp LS(RG(N5))'), 'Open screenshot & recording tools')
+  assert.equal(comboDescription('&kp LS(RG(N4))'), 'Capture a selected area (Space for a window)')
+  assert.equal(comboDescription('&kp CAPS'), 'Toggle Caps Lock')
+  assert.match(comboDescription('&custom'), /Custom behavior/)
+})

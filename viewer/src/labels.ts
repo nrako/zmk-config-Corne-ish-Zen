@@ -137,3 +137,16 @@ export function describe(binding: string) {
       }
   }
 }
+
+// macOS defaults; descriptions follow the emitted binding, not the combo name.
+export function comboDescription(binding: string): string {
+  const actions: Record<string, string> = {
+    '&kp ESC': 'Escape / cancel',
+    '&kp LS(RG(N3))': 'Capture all screens',
+    '&kp LS(RG(N4))': 'Capture a selected area (Space for a window)',
+    '&kp LS(RG(N5))': 'Open screenshot & recording tools',
+    '&kp CAPS': 'Toggle Caps Lock',
+    '&kp LG(BSPC)': 'Delete to start of line in text; move to Trash in Finder',
+  }
+  return actions[binding] ?? describe(binding).detail
+}

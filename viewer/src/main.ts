@@ -1,5 +1,5 @@
 import data from 'virtual:keymap'
-import { describe } from './labels'
+import { describe, comboDescription } from './labels'
 import './style.css'
 import { simulationAction } from './simulation'
 import geometryData from './data/geometry.json'
@@ -96,7 +96,7 @@ function comboLegend(layer: number, pos?: number, compact = false) {
   return `<div class="layer-combos ${compact ? 'combo-reminder' : ''}"><h3>${compact ? 'Shortcuts to remember' : 'Combos'}${pos === undefined ? '' : ' using this key'}</h3><p>Press the keys together to trigger the action. Hover over a combo to highlight its keys. ${compact ? '' : 'The timeout is the maximum time between key presses.'}</p><div class="combo-list">${combos.map(c => `<button class="combo" data-combo="${escape(c.name)}" data-combo-layer="${layer}">${c.positions.map(p => {
     const raw = data.layers[layer].keys[p]
     return `<kbd>${escape(describe(raw === '&trans' ? data.layers[0].keys[p] : raw).label)}</kbd>`
-  }).join(' + ')} <span>→ ${escape(describe(c.binding).label)}</span>${compact ? '' : `<small> · ${c.timeout} ms</small>`}</button>`).join('')}</div></div>`
+  }).join(' + ')} <span>→ ${escape(describe(c.binding).label)}</span>${compact ? '' : `<small> · ${c.timeout} ms</small>`}<span class="combo-description">${escape(comboDescription(c.binding))}</span></button>`).join('')}</div></div>`
 }
 function detail() {
   if (!selected)
