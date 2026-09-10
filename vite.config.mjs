@@ -5,6 +5,7 @@ import { parseKeymap } from './scripts/keymap.mjs'
 const source = resolve('config/corneish_zen.keymap')
 export default defineConfig({
   root: 'viewer',
+  base: process.env.VIEWER_BASE_PATH || '/',
   build: { outDir: '../dist', emptyOutDir: true },
   plugins: [
     {

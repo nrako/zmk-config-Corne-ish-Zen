@@ -40,8 +40,7 @@ not a full ZMK timing/stack emulator. Outputs are displayed, never executed. Hov
 combo in the panel to highlight its participating positions. Use the tabs or
 expand buttons to inspect one layer, and the overview to compare all five.
 
-Keyboard-event detection, macOS Option/Shift character tables and PNG export are
-intentionally deferred. The page never captures global shortcuts and never
+PNG export is not implemented. The page never captures global shortcuts and never
 changes firmware.
 
 ## Figma geometry and modifier preview
@@ -74,3 +73,17 @@ Solid means hold; dashed means toggle/one-shot. An access legend can describe
 the preceding layer's entry key (for example NUM position 26 to reach NUPAD),
 not the binding once the destination layer is active. Shortest reachable paths
 are shown.
+
+## GitHub Pages
+
+The Pages workflow tests and publishes this viewer after relevant changes reach
+`main`, including keymap changes. It can also be run manually from Actions.
+GitHub Pages must use **GitHub Actions** as its publishing source.
+Only `dist/` is uploaded; firmware builds remain a separate workflow.
+
+The deployment takes its base path from GitHub Pages. Local development stays
+at `/`. To check the repository subpath locally:
+
+```sh
+VIEWER_BASE_PATH=/zmk-config-Corne-ish-Zen/ npm run build
+```
