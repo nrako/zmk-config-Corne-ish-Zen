@@ -5,3 +5,6 @@ tools/
 .west/
 .DS_Store
 .serena
+
+node_modules/
+dist/
