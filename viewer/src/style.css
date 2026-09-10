@@ -563,8 +563,8 @@ aside.active .detail-title { gap: 14px; }
 aside.active .detail-title strong { font-size: 1.3rem; }
 aside.active p { margin: 8px 0; font-size: .85rem; }
 aside.active details { margin-top: 10px; font-size: .85rem; }
-aside .detail-combos .layer-combos { margin: 8px 0; padding: 0; border: 0; }
-aside .detail-combos h3, aside .detail-combos .layer-combos > p { display: none; }
+aside .layer-combos { margin: 12px 0; padding-top: 10px; }
+aside .layer-combos > p { display: none; }
 aside .layer-combos .combo { font-size: .9rem; }
 aside .layer-combos kbd { width: 2rem; height: 2rem; font-size: .8rem; }
 aside .combo .combo-description { font-size: .85rem; }
