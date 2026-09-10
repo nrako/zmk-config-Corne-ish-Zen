@@ -51,8 +51,8 @@ function screenContent(layer: number, side: number) {
   const cx = Number(screen.x) + Number(screen.width) / 2
   const y = Number(screen.y)
   return `<g class="screen-content" aria-hidden="true">
-    ${side === 0 ? `<text class="screen-layer" x="${cx}" y="${y + 17}" text-anchor="middle">${escape(data.layers[layer].name)}</text>` : ''}
-    <svg x="${cx - 9}" y="${y + 30}" width="18" height="18" viewBox="0 0 256 256">
+    ${side === 0 ? `<text class="screen-layer" x="${cx}" y="${y + 44}" text-anchor="middle">${escape(data.layers[layer].name)}</text>` : ''}
+    <svg x="${cx - 9}" y="${y + 9}" width="18" height="18" viewBox="0 0 256 256">
       <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16">
         <polygon points="128 32 192 80 128 128 128 32"/>
         <polygon points="128 128 192 176 128 224 128 128"/>

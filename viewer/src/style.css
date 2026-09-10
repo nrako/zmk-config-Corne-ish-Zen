@@ -563,4 +563,4 @@ aside .layer-combos { margin: 16px 0; }
 aside.active { bottom: 15rem; }
 
 .screen-content { color: #b4bdc8; pointer-events: none; }
-.screen-layer { fill: currentColor; font: 600 6px "Avenir Next", Avenir, sans-serif; letter-spacing: .15px; }
+.screen-layer { fill: currentColor; font: 600 7px "Avenir Next", Avenir, sans-serif; letter-spacing: .15px; }
