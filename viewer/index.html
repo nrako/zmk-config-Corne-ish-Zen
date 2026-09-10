@@ -7,6 +7,16 @@
   </head>
   <body>
     <div id="app"></div>
+    <form class="keyboard-tester" aria-label="Tester le clavier" onsubmit="return false">
+      <div class="tester-heading">
+        <label for="keyboard-test">Tester le clavier</label>
+        <button type="reset" aria-label="Effacer le texte de test">Effacer</button>
+      </div>
+      <textarea id="keyboard-test" rows="2" placeholder="Clique ici et tape…"
+        spellcheck="false" autocapitalize="off" autocomplete="off"
+        aria-describedby="keyboard-test-hint"></textarea>
+      <p id="keyboard-test-hint">Caractères reçus de ton clavier · texte conservé entre les vues</p>
+    </form>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

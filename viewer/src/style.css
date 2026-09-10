@@ -526,3 +526,38 @@ aside .layer-combos { margin: 16px 0; }
   border-radius: 7px;
 }
 .guide .combo-reminder p { font-size: .9rem; line-height: 1.5; }
+
+/* Outside #app so preview renders preserve typing, focus and composition. */
+.keyboard-tester {
+  position: fixed;
+  z-index: 6;
+  right: max(20px, env(safe-area-inset-right));
+  bottom: max(20px, env(safe-area-inset-bottom));
+  width: min(27rem, calc(100% - 40px));
+  padding: 14px 18px;
+  background: #272b32;
+  border: 1px solid #626d7d;
+  border-radius: 14px;
+  box-shadow: 0 8px 32px #0006;
+}
+.tester-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.tester-heading label { font-size: 1rem; font-weight: 500; }
+.tester-heading button { font-size: .8rem; padding: 4px 8px; }
+.keyboard-tester textarea {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px 12px;
+  resize: none;
+  border: 1px solid #555b65;
+  border-radius: 8px;
+  background: #101113;
+  color: #f2f2f3;
+  font: inherit;
+  font-size: 1.15rem;
+  line-height: 1.4;
+}
+.keyboard-tester textarea:focus { outline: 2px solid #abc5ef; outline-offset: 2px; }
+.keyboard-tester p { margin: 8px 0 0; font-size: .75rem; color: #aeb6c2; }
+#app { padding-bottom: 15rem; }
+aside.active { bottom: 15rem; }
